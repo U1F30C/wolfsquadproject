@@ -17,3 +17,7 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+Route.on('/about').render('about')
+Route.on('/professor').render('professor')
+Route.on('/student').render('student')
+Route.on('/contact').render('contact')
