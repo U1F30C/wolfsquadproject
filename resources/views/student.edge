@@ -21,30 +21,13 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="#">Centro de Integración Juvenil</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Inicio</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about">Acerca de</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact">Contacto</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Log in</a></li>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('partials.header')
     <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 272px;">
         <h1>Estudiante</h1>
         <form><input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave"><button class="btn btn-primary" type="button" style="margin: 20px;">Ingresar</button></form>
     </div>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="https://www.facebook.com/cijtlaquepaque/" target="_blank"><i class="icon ion-social-facebook"></i></a></div>
-            <p class="copyright">Centro de Integración Juvenil  © 2020</p>
-        </footer>
-    </div>
+    
+    @include('partials.footer')
     <div class="justify-content-end align-items-end align-content-end" style="height: 100%;"></div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

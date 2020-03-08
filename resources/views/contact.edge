@@ -21,20 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="#">Centro de Integración Juvenil</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Inicio</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about">Acerca de</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="contact">Contacto</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Log in</a></li>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('partials.header')
     <div class="text-center">
         <div class="container-fluid">
             <h1>Información de contacto</h1>
@@ -147,12 +134,8 @@
             </div>
         </div>
     </div>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="https://www.facebook.com/cijtlaquepaque/" target="_blank"><i class="icon ion-social-facebook"></i></a></div>
-            <p class="copyright">Centro de Integración Juvenil  © 2020</p>
-        </footer>
-    </div>
+    @include('partials.footer')
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
