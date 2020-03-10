@@ -1,56 +1,10 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CIJ_System</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Contact-Form-v2-Modal--Full-with-Google-Map.css">
-    <link rel="stylesheet" href="assets/css/Data-Table-1.css">
-    <link rel="stylesheet" href="assets/css/Data-Table.css">
-    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
-    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
-    <link rel="stylesheet" href="assets/css/Navigation-with-Search.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="#">Centro de Integración Juvenil</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Inicio</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about">Acerca de</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact">Contacto</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Log in</a></li>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@layout('layouts.master')
+@section('content')
     <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 272px;">
         <h1>Estudiante</h1>
-        <form><input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave"><button class="btn btn-primary" type="button" style="margin: 20px;">Ingresar</button></form>
+        <form>
+            <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave">
+            <button class="btn btn-primary" type="button" style="margin: 20px;">Ingresar</button>
+        </form>
     </div>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="https://www.facebook.com/cijtlaquepaque/" target="_blank"><i class="icon ion-social-facebook"></i></a></div>
-            <p class="copyright">Centro de Integración Juvenil  © 2020</p>
-        </footer>
-    </div>
-    <div class="justify-content-end align-items-end align-content-end" style="height: 100%;"></div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script src="assets/js/Contact-Form-v2-Modal--Full-with-Google-Map.js"></script>
-</body>
-
-</html>
+@endsection

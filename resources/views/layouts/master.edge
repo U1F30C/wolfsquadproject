@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    @component('components.head') 
+    @endcomponent
+    @section('title')
+      <title>CIJ_System</title>
+    @endsection
+  </head>
+  <body class="text-justify" style="height: 100%;">
+    <header class="header">
+        @include('partials.header') 
+    </header>
+
+    <div class="container">
+
+        <div class="content">
+            @!section('content')
+        </div>
+
+        <div class="footer-basic">
+
+        <footer>
+            @component('components.footer') 
+            @endcomponent
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
