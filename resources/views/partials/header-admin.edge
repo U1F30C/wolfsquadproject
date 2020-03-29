@@ -13,6 +13,12 @@
                 </li>
             </ul>
         </div>
-        <a class="btn btn-primary" style="background-color: rgba(0,0,0,0);color: rgb(0,0,0);" href="{{route('welcome')}}">Salir</a>
+
+        <form method="POST" action="/logout">
+            {{ csrfField() }}
+            <button class="btn btn-primary" style="background-color: rgba(0,0,0,0);color: rgb(0,0,0);" type="submit">
+                Salir
+            </button>
+        </form>
     </div>
 </nav>

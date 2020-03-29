@@ -18,6 +18,7 @@ const Route = use('Route')
 
 Route.on('/').render('welcome').as('welcome')
 Route.post('/login', 'UserController.login')
+Route.post('/logout', 'UserController.logout')
 Route.on('/about').render('about').as('about')
 Route.on('/contact').render('contact').as('contact')
 
