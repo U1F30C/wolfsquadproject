@@ -16,40 +16,40 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
-Route.on('/about').render('about')
-Route.on('/contact').render('contact')
+Route.on('/').render('welcome').as('welcome')
+Route.on('/about').render('about').as('about')
+Route.on('/contact').render('contact').as('contact')
 
 /* 
 |--------------------------------------------------------------------------
 | Admin
 |--------------------------------------------------------------------------
 */
-Route.on('/login').render('log-in')
-Route.on('/recover_password').render('recover-password')
-Route.on('/new_password').render('new-password')
-Route.on('/new_email').render('new-email')
+Route.on('/login').render('log-in').as('login')
+Route.on('/recover_password').render('recover-password').as('passwordRecovery')
+Route.on('/new_password').render('new-password').as('passwordChange')
+Route.on('/new_email').render('new-email').as('emailChange')
 
-Route.on('/schools').render('create-schools-form')
-Route.on('/automatic-school-form').render('school-automatic-form')
-Route.on('/manual-school-form').render('school-manual-form')
+Route.on('/schools').render('create-schools-form').as('schoolsManagement')
+Route.on('/automatic-school-form').render('school-automatic-form').as('automaticForm')
+Route.on('/manual-school-form').render('school-manual-form').as('manualForm')
 
-Route.on('/statistics').render('school-info')
-Route.on('/statistics-classroom').render('classroom-info')
+Route.on('/statistics').render('school-info').as('statistics')
+Route.on('/statistics-classroom').render('classroom-info').as('classRoomAnswers')
 
 /* 
 |--------------------------------------------------------------------------
 | Teacher
 |--------------------------------------------------------------------------
 */
-Route.on('/professor').render('professor')
-Route.on('/professor-list').render('professor-list')
+Route.on('/professor').render('professor').as('professor')
+Route.on('/professor-list').render('professor-list').as('groupAnswersList')
 
 /* 
 |--------------------------------------------------------------------------
 | Student
 |--------------------------------------------------------------------------
 */
-Route.on('/student').render('student')
-Route.on('/student-questionnarie').render('questionnaire')
-Route.on('/student-questionnarie-end').render('end-questionnaire')
+Route.on('/student').render('student').as('student')
+Route.on('/student-questionnaire').render('questionnaire').as('questionnaire')
+Route.on('/student-questionnaire-end').render('end-questionnaire').as('endQuestionaire')
