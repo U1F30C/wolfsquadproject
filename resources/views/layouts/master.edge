@@ -7,7 +7,7 @@
       <title>CIJ_System</title>
     @endsection
   </head>
-  <body class="text-justify" style="height: 100%;">
+  <body class="text-justify" style="height: 100%;" id="page-top">
     <header class="header">
       @section('header')
         @include('partials.header')
@@ -22,7 +22,8 @@
 
         <div class="footer-basic">
 
-        <footer>
+          <footer>
+            <a class="rounded scroll-to-top" href="#page-top">
             @component('components.footer') 
             @endcomponent
         </footer>
