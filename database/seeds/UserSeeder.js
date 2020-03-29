@@ -18,7 +18,6 @@ class UserSeeder {
   async run() {
     const usersArray = await Factory.model("App/Models/User").createMany(2);
     usersArray.forEach(user => {
-      console.log(user);
       return Database.table("users").insert(user);
     });
     const defaultUser = await Factory.model("App/Models/User").create({
