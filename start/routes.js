@@ -53,6 +53,5 @@ Route.on('/professor-list').render('professor-list').as('groupAnswersList')
 |--------------------------------------------------------------------------
 */
 Route.on('/student').render('student').as('student')
-/*Route.on('/student-questionnaire').render('questionnaire').as('questionnaire')*/
-Route.get('/student-questionnaire', 'QuestionnaireController.index')
+Route.on('/student-questionnaire').render('questionnaire').as('questionnaire')
 Route.on('/student-questionnaire-end').render('end-questionnaire').as('endQuestionaire')
