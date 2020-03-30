@@ -21,3 +21,9 @@ Factory.blueprint("App/Models/User", (faker, i, data) => {
     password: data.password || faker.password()
   };
 });
+
+Factory.blueprint("App/Models/Area", faker => {
+  return {
+    name: faker.name(),
+  };
+});
