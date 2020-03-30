@@ -22,7 +22,7 @@ Route.post('/logout', 'UserController.logout')
 Route.on('/about').render('about').as('about')
 Route.on('/contact').render('contact').as('contact')
 
-/* 
+/*
 |--------------------------------------------------------------------------
 | Admin
 |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ Route.on('/manual-school-form').render('school-manual-form').as('manualForm').mi
 Route.on('/statistics').render('school-info').as('statistics').middleware(['auth'])
 Route.on('/statistics-classroom').render('classroom-info').as('classRoomAnswers').middleware(['auth'])
 
-/* 
+/*
 |--------------------------------------------------------------------------
 | Teacher
 |--------------------------------------------------------------------------
@@ -47,11 +47,12 @@ Route.on('/statistics-classroom').render('classroom-info').as('classRoomAnswers'
 Route.on('/professor').render('professor').as('professor')
 Route.on('/professor-list').render('professor-list').as('groupAnswersList')
 
-/* 
+/*
 |--------------------------------------------------------------------------
 | Student
 |--------------------------------------------------------------------------
 */
 Route.on('/student').render('student').as('student')
-Route.on('/student-questionnaire').render('questionnaire').as('questionnaire')
+/*Route.on('/student-questionnaire').render('questionnaire').as('questionnaire')*/
+Route.get('/student-questionnaire', 'QuestionnaireController.index')
 Route.on('/student-questionnaire-end').render('end-questionnaire').as('endQuestionaire')
