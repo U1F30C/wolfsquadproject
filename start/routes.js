@@ -63,6 +63,16 @@ Route.on('/statistics-classroom')
   .as('classRoomAnswers')
   .middleware(['auth']);
 
+  const Area = use('App/Models/Area')
+  Route.get('areas', async () => {
+    return await Area.all()
+  })
+
+
+  const Questions = use('App/Models/Question')
+  Route.get('questions', async () => {
+    return await Questions.all()
+  })
 /*
 |--------------------------------------------------------------------------
 | Teacher
