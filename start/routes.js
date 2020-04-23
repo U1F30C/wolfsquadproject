@@ -61,7 +61,7 @@ Route.on('/statistics')
 Route.on('/statistics-classroom')
   .render('classroom-info')
   .as('classRoomAnswers')
-  .middleware(['auth']);
+  .middleware(['auth']); 
 
   const Area = use('App/Models/Area')
   Route.get('areas', async () => {
