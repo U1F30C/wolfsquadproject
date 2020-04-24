@@ -63,16 +63,7 @@ Route.on('/statistics-classroom')
   .as('classRoomAnswers')
   .middleware(['auth']); 
 
-  const Area = use('App/Models/Area')
-  Route.get('areas', async () => {
-    return await Area.all()
-  })
 
-
-  const Questions = use('App/Models/Question')
-  Route.get('questions', async () => {
-    return await Questions.all()
-  })
 /*
 |--------------------------------------------------------------------------
 | Teacher
@@ -87,7 +78,14 @@ Route.on('/professor-list').render('professor-list').as('groupAnswersList');
 |--------------------------------------------------------------------------
 */
 Route.on('/student').render('student').as('student');
-Route.on('/student-questionnaire').render('questionnaire').as('questionnaire');
-Route.on('/student-questionnaire-end')
-  .render('end-questionnaire')
-  .as('endQuestionaire');
+
+/*const Area = use('App/Models/Area')
+Route.get('areas', async () => {
+  return await Area.all()
+})
+const Questions = use('App/Models/Question')
+Route.get('questions', async () => {
+  return await Questions.all()
+})*/
+
+Route.get('/student-questionnaire/:page','QuestionController.index').as('questions')
