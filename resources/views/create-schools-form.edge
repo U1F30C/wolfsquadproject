@@ -4,11 +4,29 @@
 @endsection
 @section('content')
     <div class="container text-center">
-        <h1>Crear Escuelas</h1>
-        <input type="text" placeholder="Nombre de la escuela">
-        <h1>Grupos</h1>
-        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Manual</label></div>
-        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Automatico</label></div>
-        <button class="btn btn-dark" type="button">Crear</button>
+        <form action="../">
+
+            <h1>Crear Escuelas</h1>
+            <h1>Grupos</h1>
+            
+            <fieldset>
+                <div class="form-check">
+                    <label><input type="radio" name="option" value="{{route('manualForm')}}">Manual</label>
+                </div>
+
+                <div class="form-check">
+                    <label><input type="radio" name="option" value="{{route('automaticForm')}}">Automatico</label>
+                </div>
+                
+                <button class="btn btn-dark" type="button" value="Go" onclick="
+                    ob=this.form.option;
+                    for(i=0;i<ob.length;i++){
+                        if(ob[i].checked)
+                            window.open(ob[i].value,'_self');
+                        ;
+                    }">Crear
+                </button>
+            </fieldset>
+        </form>
     </div>
 @endsection

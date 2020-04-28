@@ -28,14 +28,17 @@ Route.on('/contact').render('contact').as('contact');
 |--------------------------------------------------------------------------
 */
 Route.on('/login').render('log-in').as('login').middleware(['guest']);
+
 Route.on('/recover_password')
   .render('recover-password')
   .as('passwordRecovery')
   .middleware(['guest']);
+
 Route.on('/new_password')
   .render('new-password')
   .as('passwordChange')
   .middleware(['auth']);
+
 Route.on('/new_email')
   .render('new-email')
   .as('emailChange')
@@ -45,19 +48,26 @@ Route.on('/schools')
   .render('create-schools-form')
   .as('schoolsManagement')
   .middleware(['auth']);
-Route.on('/automatic-school-form')
-  .render('school-automatic-form')
+
+//GET
+Route.get('/automatic-school-form', 'GroupController.addAutomatic')
   .as('automaticForm')
   .middleware(['auth']);
-Route.on('/manual-school-form')
-  .render('school-manual-form')
+
+//GET
+Route.get('/manual-school-form', 'GroupController.addManual')
   .as('manualForm')
   .middleware(['auth']);
+
+//POST
+Route.post('/clave', 'GroupController.saveManual')
+Route.post('/claves', 'GroupController.saveAutomatic')
 
 Route.on('/statistics')
   .render('school-info')
   .as('statistics')
   .middleware(['auth']);
+
 Route.on('/statistics-classroom')
   .render('classroom-info')
   .as('classRoomAnswers')
@@ -78,6 +88,4 @@ Route.on('/professor-list').render('professor-list').as('groupAnswersList');
 */
 Route.on('/student').render('student').as('student');
 Route.on('/student-questionnaire').render('questionnaire').as('questionnaire');
-Route.on('/student-questionnaire-end')
-  .render('end-questionnaire')
-  .as('endQuestionaire');
+Route.on('/student-questionnaire-end').render('end-questionnaire').as('endQuestionaire');
