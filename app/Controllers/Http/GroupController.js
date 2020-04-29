@@ -18,23 +18,37 @@ class GroupController {
         const school = new School()
 
         let name_school = request.input('school_name');
+
+        school.name = name_school
+
+        await school.save();
+
+        group.school_id = school.id;
+
         let grade = request.input('grado');
         let grupo = request.input('grupo');
-        let hashStudent = name_school + grupo + grade
-        let hashTeacher = grupo + name_school + grade
+        let hashStudent = name_school + grupo + grade + school.id
+        let hashTeacher = grupo + name_school + grade + school.id
+
+        let studentsKey = await Hash.make(hashStudent)
+        let teacherskey = await Hash.make(hashTeacher)
+
+        let finStudentKey = studentsKey.length
+        let finTeacherKey = teacherskey.length
         
-        school.name = name_school
-        group.studentsAccessKey = await Hash.make(hashStudent, 5)
-        group.teachersAccessKey = await Hash.make(hashTeacher, 5)
+        
+        group.studentsAccessKey = studentsKey.slice(finStudentKey - 4, finStudentKey)
+        group.teachersAccessKey = teacherskey.slice(finTeacherKey - 4, finTeacherKey)
         group.name = grade + "-" + grupo
 
-        await school.save()
+        await group.save();
 
-        group.school_id = school.id
+        group.studentsAccessKey = gorup.id + group.studentsAccessKey;
+        group.teachersAccessKey = group.id + group.teachersAccessKey;
 
-        await group.save()
+        await group.save();
 
-        return response.redirect('/schools')
+        return response.redirect('/schools');
     }
 
     async saveAutomatic({ request, response }){
@@ -47,15 +61,16 @@ class GroupController {
 
         let hashStudent;
         let hashTeacher;
+        let studentsKey;
+        let teacherskey;
+        let finStudentKey;
+        let finTeacherKey;
+
         let grades = request.input('grado');
         let grupos = request.input('grupo');
 
         let grados = parseInt(grades);
         let groups;
-
-        console.log("Grades: ", grades);
-        console.log("Grupos: ", grupos);
-        console.log("Grados Entero: ", grados);
         
         switch(grupos){
             case 'A':
@@ -69,9 +84,7 @@ class GroupController {
             case 'E':
                 groups = 5; break;
         }
-        
-        console.log("Grupos Numero: ", groups)
-        
+
         for(let grade = 1; grade <= grados; grade++){
             for(let grupo = 1; grupo <= groups; grupo++){
                 const group = new Group();
@@ -90,14 +103,24 @@ class GroupController {
                         grupoLetra = 'E'; break;
                 }
 
-                hashStudent = name_school + grupoLetra + grade
-                hashTeacher = grupoLetra + name_school + grade
-                group.studentsAccessKey = await Hash.make(hashStudent, 5)
-                group.teachersAccessKey = await Hash.make(hashTeacher, 5)
+                hashStudent = name_school + grupoLetra + grade + school.id
+                hashTeacher = grupoLetra + name_school + grade + school.id
+                studentsKey = await Hash.make(hashStudent)
+                teacherskey = await Hash.make(hashTeacher)
+
+                finStudentKey = studentsKey.length
+                finTeacherKey = teacherskey.length
+
+                group.studentsAccessKey = studentsKey.slice(finStudentKey - 4, finStudentKey)
+                group.teachersAccessKey = teacherskey.slice(finTeacherKey - 4, finTeacherKey)
                 group.name = grade + "-" + grupoLetra
                 group.school_id = school.id
 
-                console.log(group)
+                await group.save();
+
+                group.studentsAccessKey = group.id + group.studentsAccessKey;
+                group.teachersAccessKey = group.id + group.teachersAccessKey;
+
                 await group.save();
             }
         }
