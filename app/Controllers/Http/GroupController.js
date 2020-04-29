@@ -43,7 +43,7 @@ class GroupController {
 
         await group.save();
 
-        group.studentsAccessKey = gorup.id + group.studentsAccessKey;
+        group.studentsAccessKey = group.id + group.studentsAccessKey;
         group.teachersAccessKey = group.id + group.teachersAccessKey;
 
         await group.save();

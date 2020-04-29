@@ -1,19 +1,18 @@
 'use strict'
-
 const Database = use('Database')
 
 const View = use('View')
 const Validator = use('Validator')
 
-class QuestionnaireAccessController {
+class TeacherController {
     async index({request, response,params}){ 
-        const student_code = request.all()["student_code"]  
+        const teacher_code = request.all()["teacher_code"]  
 
         const rules = {
-            student_code : 'required', 
+            teacher_code : 'required', 
         } 
         
-        const validate = await Validator.validate(student_code, rules)
+        const validate = await Validator.validate(teacher_code, rules)
     
         if (validate.fails()) { 
            var error  = {
@@ -24,11 +23,11 @@ class QuestionnaireAccessController {
         
         const ok = await Database
                     .table("groups")
-                    .where('studentsAccessKey', student_code)
+                    .where('teachersAccessKey', teacher_code)
                     .first() 
         
         if (ok){
-            response.redirect('/student-questionnaire/1')
+            return View.render('professor-list') 
         }else{
                 var error  = {
                      msg : "No se encontro el registro"
@@ -37,7 +36,6 @@ class QuestionnaireAccessController {
         }
         
     }
- 
 }
 
-module.exports = QuestionnaireAccessController
+module.exports = TeacherController

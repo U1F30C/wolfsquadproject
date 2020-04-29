@@ -2,9 +2,16 @@
 @section('content')
     <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 272px;">
         <h1>Estudiante</h1>
-        <form>
-            <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave">
-            <a class="btn btn-primary" style="margin: 20px;" role="button" href="{{route('questionnaire')}}">Ingresar</a>
+
+        <form method="POST" action="/student-access">
+            
+            {{ csrfField()}}
+            <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave" name="student_code" id="student_code">
+
+            <button class="btn btn-primary" type="submit" >Ingresar</button>
+
         </form>
+    
+    
     </div>
 @endsection
