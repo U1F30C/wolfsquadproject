@@ -27,7 +27,7 @@ class TeacherController {
                     .first() 
         
         if (ok){
-            return View.render('professor-list') 
+            return View.render('professor-index') 
         }else{
                 var error  = {
                      msg : "No se encontro el registro"
