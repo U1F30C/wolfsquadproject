@@ -99,4 +99,5 @@ Route.get('questions', async () => {
   return await Questions.all()
 })*/
 Route.post('/student-access','QuestionnaireAccessController.index').as('questionnaireAccess')
+Route.post('/student_store','StudentController.store').as('studentStore')
 Route.get('/student-questionnaire/:page','QuestionController.index').as('questions')

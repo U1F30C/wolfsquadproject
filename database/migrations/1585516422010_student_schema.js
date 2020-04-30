@@ -8,8 +8,7 @@ class StudentSchema extends Schema {
     this.create('students', (table) => {
       table.increments()
       table.integer('group_id').unsigned().references('id').inTable('groups')
-      table.string('firstName',100).notNullable()
-      table.string('lastName',100).notNullable()
+      table.string('name',100).notNullable() 
       table.string('grade',1).notNullable()
       table.string('gender',1).notNullable().defaultTo('F')
       table.integer('age').notNullable()

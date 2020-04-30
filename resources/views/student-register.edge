@@ -1,0 +1,14 @@
+@layout('layouts.master')
+@section('content')
+    <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 272px;">
+        <h1>Estudiante - Registro</h1>
+
+        <form method="POST" action="/student_store">
+
+            {{ csrfField()}}
+        
+        </form>
+    
+    
+    </div>
+@endsection
