@@ -90,18 +90,9 @@ Route.post('/teacher-access', 'TeacherController.index').as('teacherAccess');
 */
 Route.on('/student').render('student').as('student');
 
-/*const Area = use('App/Models/Area')
-Route.get('areas', async () => {
-  return await Area.all()
-})
-const Questions = use('App/Models/Question')
-Route.get('questions', async () => {
-  return await Questions.all()
-})*/
-Route.post('/student-access', 'QuestionnaireAccessController.index').as(
+Route.post('/student-access', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
-Route.post('/student_store', 'StudentController.store').as('studentStore');
-Route.get('/student-questionnaire/:page', 'QuestionController.index').as(
+Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
   'questions'
 );

@@ -1,12 +1,11 @@
 'use strict';
 const Database = use('Database');
-
 const View = use('View');
 const Validator = use('Validator');
 
 class TeacherController {
   async index({ request, response, params }) {
-    const teacher_code = request.all()['teacher_code'];
+    const teacher_code = request.input('teacher_code');
 
     const rules = {
       teacher_code: 'required',
@@ -16,20 +15,20 @@ class TeacherController {
 
     if (validate.fails()) {
       var error = {
-        msg: 'No se ingreso la clave',
+        msg: 'Clave requerida',
       };
       response.status(400).send(error);
     }
 
-    const ok = await Database.table('groups')
+    const group = await Database.table('groups')
       .where('teachersAccessKey', teacher_code)
       .first();
 
-    if (ok) {
+    if (group) {
       return View.render('professor-index');
     } else {
       var error = {
-        msg: 'No se encontro el registro',
+        msg: 'Registo no encontrado',
       };
       response.status(400).send(error);
     }

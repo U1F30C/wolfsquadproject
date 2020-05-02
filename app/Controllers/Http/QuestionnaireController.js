@@ -1,22 +1,28 @@
 'use strict';
 
+const Question = use('App/Models/Question');
 const Database = use('Database');
-
 const Validator = use('Validator');
-
 const Student = use('App/Models/Student');
+const View = use('View');
 
-class QuestionnaireAccessController {
-  async index({ request, response, params }) {
+class QuestionnaireController {
+  async questionnaire({ request, response, params }) {
+    const page = params.page || 1;
+    const questions = await Question.query().paginate(page, 10);
+    const pagination = questions.toJSON();
+    pagination.offset = (pagination.page - 1) * pagination.perPage;
+    pagination.pages = Array(pagination.lastPage)
+      .fill(null)
+      .map((x, i) => i + 1);
+    const data = {
+      questions,
+    };
+    return View.render('questionnaire', { questions: pagination });
+  }
+
+  async access({ request, response, params }) {
     const parameters = request.all();
-
-    console.log(parameters);
-    const student_code = request.all()['student_code'];
-
-    const name = request.all()['name'];
-    const gender = request.all()['gender'];
-    const age = request.all()['age'];
-    const schedule = request.all()['schedule'];
 
     const rules = {
       student_code: 'required',
@@ -28,37 +34,35 @@ class QuestionnaireAccessController {
 
     const validate = await Validator.validate(parameters, rules);
 
+    const { name, gender, age, schedule, student_code } = parameters;
+
     if (validate.fails()) {
       var error = {
-        msg: 'No se ingreso la dato',
+        msg: 'Datos faltantes',
       };
       response.status(400).send(error);
     } else {
-      const ok = await Database.table('groups')
+      const group = await Database.table('groups')
         .where('studentsAccessKey', student_code)
         .first();
 
-      if (ok) {
-        console.log(ok);
+      if (group) {
         const student = new Student();
         student.name = name;
         student.gender = gender;
         student.age = age;
         student.schedule = schedule;
-        student.group_id = ok.id;
+        student.group_id = group.id;
 
         student.save();
-
-        //response.redirect('/student_store',true)
         response.redirect('/student-questionnaire/1');
       } else {
         var error = {
-          msg: 'No se encontro el dato',
+          msg: 'Clave no encontrada',
         };
         response.status(400).send(error);
       }
     }
   }
 }
-
-module.exports = QuestionnaireAccessController;
+module.exports = QuestionnaireController;

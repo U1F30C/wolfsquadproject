@@ -9,7 +9,6 @@ class StudentSchema extends Schema {
       table.increments();
       table.integer('group_id').unsigned().references('id').inTable('groups');
       table.string('name', 100).notNullable();
-      table.string('grade', 1).notNullable();
       table.string('gender', 1).notNullable().defaultTo('F');
       table.integer('age').notNullable();
       table.string('schedule', 1).notNullable().defaultTo('M');
