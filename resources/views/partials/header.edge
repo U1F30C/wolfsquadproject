@@ -1,3 +1,6 @@
+@loggedIn
+    @include('partials.header-admin')
+@else
 <nav class="navbar navbar-light navbar-expand-md navigation-clean">
     <div class="container"><a class="navbar-brand" href="#">Centro de Integración Juvenil</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div
@@ -12,3 +15,4 @@
         </div>
     </div>
 </nav>
+@endloggedIn
