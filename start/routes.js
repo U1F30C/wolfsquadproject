@@ -49,13 +49,14 @@ Route.on('/schools')
   .as('schoolsManagement')
   .middleware(['auth']);
 
-//GET
-Route.get('/automatic-school-form', 'GroupController.addAutomatic')
+Route.on('/automatic-school-form')
+  .render('school-automatic-form')
   .as('automaticForm')
   .middleware(['auth']);
 
 //GET
-Route.get('/manual-school-form', 'GroupController.addManual')
+Route.on('/manual-school-form')
+  .render('school-manual-form')
   .as('manualForm')
   .middleware(['auth']);
 
