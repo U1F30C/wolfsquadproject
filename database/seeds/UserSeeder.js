@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -11,21 +11,21 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use("Factory");
-const Database = use("Database");
+const Factory = use('Factory');
+const Database = use('Database');
 
 class UserSeeder {
   async run() {
-    const usersArray = await Factory.model("App/Models/User").createMany(2);
-    usersArray.forEach(user => {
-      return Database.table("users").insert(user);
+    const usersArray = await Factory.model('App/Models/User').createMany(2);
+    usersArray.forEach((user) => {
+      return Database.table('users').insert(user);
     });
-    const defaultUser = await Factory.model("App/Models/User").create({
-      email: "admin1@wsp.com",
-      username: "admin1",
-      password: "admin1"
+    const defaultUser = await Factory.model('App/Models/User').create({
+      email: 'admin1@wsp.com',
+      username: 'admin1',
+      password: 'admin1',
     });
-    Database.table("users").insert(defaultUser);
+    Database.table('users').insert(defaultUser);
   }
 }
 

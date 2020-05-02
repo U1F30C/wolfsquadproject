@@ -1,6 +1,5 @@
-'use strict'
+'use strict';
 
-class AnswerStudentController {
-}
+class AnswerStudentController {}
 
-module.exports = AnswerStudentController
+module.exports = AnswerStudentController;

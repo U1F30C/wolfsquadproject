@@ -1,17 +1,16 @@
-'use strict'
+'use strict';
 
-const School = use('App/Model/School')
+const School = use('App/Model/School');
 
 class SchoolController {
-    async save( { request, response}){
-        school = new School()
-        school.name = request.input('school_name')
+  async save({ request, response }) {
+    school = new School();
+    school.name = request.input('school_name');
 
-        await school.save()
+    await school.save();
 
-        return response.redirect('/clave')
-    }
-
+    return response.redirect('/clave');
+  }
 }
 
-module.exports = SchoolController
+module.exports = SchoolController;

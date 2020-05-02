@@ -22,15 +22,15 @@ Factory.blueprint('App/Models/User', (faker, i, data) => {
   };
 });
 
-Factory.blueprint('App/Models/Area', (faker,i,data) => {
+Factory.blueprint('App/Models/Area', (faker, i, data) => {
   return {
     name: data.name || faker.name(),
   };
 });
 
-Factory.blueprint('App/Models/Question', (faker,i,data) => {
+Factory.blueprint('App/Models/Question', (faker, i, data) => {
   return {
     description: data.description || faker.description(),
-    positiveIsRisk : data.positiveIsRisk,
+    positiveIsRisk: data.positiveIsRisk,
   };
 });

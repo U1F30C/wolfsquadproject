@@ -1,20 +1,20 @@
-'use strict'
+'use strict';
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
+const Schema = use('Schema');
 
 class AreaSchema extends Schema {
-  up () {
+  up() {
     this.create('areas', (table) => {
-      table.increments()
-      table.string('name',80).notNullable()
-      table.timestamps()
+      table.increments();
+      table.string('name', 80).notNullable();
+      table.timestamps();
     });
   }
 
-  down () {
-    this.drop('areas')
+  down() {
+    this.drop('areas');
   }
 }
 
-module.exports = AreaSchema
+module.exports = AreaSchema;

@@ -60,8 +60,8 @@ Route.get('/manual-school-form', 'GroupController.addManual')
   .middleware(['auth']);
 
 //POST
-Route.post('/clave', 'GroupController.saveManual')
-Route.post('/claves', 'GroupController.saveAutomatic')
+Route.post('/clave', 'GroupController.saveManual');
+Route.post('/claves', 'GroupController.saveAutomatic');
 
 Route.on('/statistics')
   .render('school-info')
@@ -71,8 +71,7 @@ Route.on('/statistics')
 Route.on('/statistics-classroom')
   .render('classroom-info')
   .as('classRoomAnswers')
-  .middleware(['auth']); 
-
+  .middleware(['auth']);
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +80,7 @@ Route.on('/statistics-classroom')
 */
 Route.on('/professor').render('professor').as('professor');
 Route.on('/professor-list').render('professor-list').as('groupAnswersList');
-Route.post('/teacher-access','TeacherController.index').as('teacherAccess')
+Route.post('/teacher-access', 'TeacherController.index').as('teacherAccess');
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +97,10 @@ const Questions = use('App/Models/Question')
 Route.get('questions', async () => {
   return await Questions.all()
 })*/
-Route.post('/student-access','QuestionnaireAccessController.index').as('questionnaireAccess')
-Route.post('/student_store','StudentController.store').as('studentStore')
-Route.get('/student-questionnaire/:page','QuestionController.index').as('questions')
+Route.post('/student-access', 'QuestionnaireAccessController.index').as(
+  'questionnaireAccess'
+);
+Route.post('/student_store', 'StudentController.store').as('studentStore');
+Route.get('/student-questionnaire/:page', 'QuestionController.index').as(
+  'questions'
+);
