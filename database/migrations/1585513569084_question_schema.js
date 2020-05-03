@@ -7,7 +7,7 @@ class QuestionSchema extends Schema {
   up() {
     this.create('questions', (table) => {
       table.increments();
-      table.string('description', 150).notNullable();
+      table.string('description', 300).notNullable();
       table.boolean('positiveIsRisk').defaultTo(true);
       table.timestamps();
     });
