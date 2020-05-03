@@ -10,6 +10,9 @@ class AreaSchema extends Schema {
       table.string('name', 80).notNullable();
       table.timestamps();
     });
+    this.alter('questions', (table) => {
+      table.integer('area_id').unsigned().references('id').inTable('areas');
+    });
   }
 
   down() {
