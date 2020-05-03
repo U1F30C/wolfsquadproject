@@ -9,7 +9,6 @@ class QuestionSchema extends Schema {
       table.increments();
       table.string('description', 150).notNullable();
       table.boolean('positiveIsRisk').defaultTo(true);
-      table.integer('area_id').unsigned().references('id').inTable('areas');
       table.timestamps();
     });
   }
