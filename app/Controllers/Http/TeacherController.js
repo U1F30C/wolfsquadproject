@@ -3,7 +3,7 @@ const Database = use('Database');
 const Validator = use('Validator');
 
 class TeacherController {
-  async list({ request, response, params, session, view }) {
+  async index({ request, response, auth }) {
     const teacher_code = request.input('teacher_code');
 
     const rules = {
@@ -13,8 +13,7 @@ class TeacherController {
     const messages = {
       'teacher_code.required':
         '¡Error! Por favor llena toda la información para continuar.',
-      'teacher_code.code':
-        '¡Error! El código que ingresaste no es válido.',
+      'teacher_code.code': '¡Error! El código que ingresaste no es válido.',
     };
 
     const validate = await Validator.validate(teacher_code, rules, messages);
@@ -34,9 +33,25 @@ class TeacherController {
         id: teacher_code.slice(0, -4),
       })
       .first();
-
     if (group) {
-      return view.render('professor-index');
+      response.route('TeacherController.show', {
+        id: group.id,
+        code: teacher_code,
+      });
+    } else {
+      var error = {
+        msg: 'Registo no encontrado',
+      };
+      response.status(400).send(error);
+    }
+  }
+
+  async show({ request, response, params, view }) {
+    const id = params.id;
+
+    const students = await Database.table('students').where('group_id', id);
+    if (students) {
+      return view.render('professor-index', { students });
     } else {
       session.flash({
         type: 'error',
