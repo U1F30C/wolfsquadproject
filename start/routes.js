@@ -54,15 +54,16 @@ Route.on('/automatic-school-form')
   .as('automaticForm')
   .middleware(['auth']);
 
-//GET
 Route.on('/manual-school-form')
   .render('school-manual-form')
   .as('manualForm')
   .middleware(['auth']);
 
 //POST
-Route.post('/clave', 'GroupController.saveManual');
-Route.post('/claves', 'GroupController.saveAutomatic');
+Route.post('/generarClave', 'GroupController.saveManual');
+Route.post('/generarClaves', 'GroupController.saveAutomatic');
+
+Route.get('/clave', 'GroupController.mostrarClaves');
 
 Route.on('/statistics')
   .render('school-info')
@@ -93,6 +94,7 @@ Route.on('/student').render('student').as('student');
 Route.post('/student-access', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
+
 Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
   'questions'
 );

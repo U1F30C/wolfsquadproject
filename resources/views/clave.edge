@@ -1,20 +1,32 @@
 @layout('layouts.master')
 @section('content')
 
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Codigo estudiante</label>
-                </div>
-                
-                <div class="col-md-6">
-                    <label>Codigo Profesor</label>
-                </div>
+    <div class="container">
+        <div class="row text-center">
+            <div class='col'>
+                <h1>Claves</h1>
             </div>
         </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
+        <table class="table table-hover table-bordered results">
+            <thead>
+                <tr>
+                    <th class="col-md-3 col-xs-3">Escuela</th>
+                    <th class="col-md-3 col-xs-3">Grupo</th>
+                    <th class="col-md-3 col-xs-3">Codigo Estudiante</th>
+                    <th class="col-md-3 col-xs-3">Codigo Profesor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(clave in schools_groups)
+                    <tr>
+                        <td>{{ clave.nameSchool}}</td>
+                        <td>{{ clave.name }}</td>
+                        <td>{{ clave.studentsAccessKey }}</td>
+                        <td>{{ clave.teachersAccessKey }}</td>
+                    </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
 @endsection
