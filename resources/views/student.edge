@@ -2,9 +2,17 @@
 @section('content')
     <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 500px;">
         <h1>Estudiante</h1>
-
+        @if(url=='/student-error')
+      <div class="alert alert-danger">
+        <strong>¡Error!</strong>  No encontramos la clave, confirma tu información.
+      </div>
+        @elseif(url=='/student-warning')
+          <div class="alert alert-warning">
+            <strong>¡Error!</strong>  Por favor llena toda la información para continuar.
+          </div>
+        @endif
         <form method="POST" action="/student-access">
-            
+
             {{ csrfField()}}
 
             <div class="form-group">
@@ -29,15 +37,12 @@
             <div class="form-group">
                 <input placeholder="Ingresa tu edad" type="number" class="form-control " name="age" id="age" min="0" max="100">
             </div>
- 
+
             <div class="form-group">
                 <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave" name="student_code" id="student_code">
             </div>
             <button class="btn btn-primary" type="submit" >Ingresar</button>
-
         </form>
-    
-    
     </div>
-    
+
 @endsection

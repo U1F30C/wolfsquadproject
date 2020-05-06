@@ -3,6 +3,11 @@
     <div class="text-center">
         <div class="container-fluid">
             <h1>Información de contacto</h1>
+            @if(url=='/contact-end-questionnaire')
+            <div class="alert alert-success">
+              <strong>¡Gracias por responder!</strong>  Estamos a tu servicio, contactanos.
+            </div>
+            @endif
             <hr>
             <form id="contactForm" action="javascript:void(0);" method="get"><input class="form-control" type="hidden" name="Introduction" value="This email was sent from www.awebsite.com"><input class="form-control" type="hidden" name="subject" value="Awebsite.com Contact Form"><input class="form-control" type="hidden"
                     name="to" value="email@awebsite.com">

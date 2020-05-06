@@ -37,10 +37,8 @@ class QuestionnaireController {
     const { name, gender, age, schedule, student_code } = parameters;
 
     if (validate.fails()) {
-      var error = {
-        msg: 'Datos faltantes',
-      };
-      response.status(400).send(error);
+      //Datos faltantes
+      response.redirect('/student-warning')
     } else {
       const group = await Database.table('groups')
         .where('studentsAccessKey', student_code)
@@ -57,21 +55,15 @@ class QuestionnaireController {
         student.save();
         response.redirect('/student-questionnaire/1');
       } else {
-        var error = {
-          msg: 'Clave no encontrada',
-        };
-        response.status(400).send(error);
+        //Clave no encontrada
+        response.redirect('/student-error')
       }
     }
   }
 
   async SaveAnswers({ request, response, view }) {
-        response.redirect('/contact');
+        response.redirect('/contact-end-questionnaire');
 
-  }
-
-  async showEnd({ request, response, params,view }) {
-    return view.render('/about');
   }
 }
 module.exports = QuestionnaireController;
