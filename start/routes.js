@@ -96,3 +96,6 @@ Route.post('/student-access', 'QuestionnaireController.access').as(
 Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
   'questions'
 );
+Route.post('/student-questionnaire-end','QuestionnaireController.SaveAnswers').as('saveAnswers');
+
+

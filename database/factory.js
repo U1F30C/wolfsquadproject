@@ -31,6 +31,13 @@ Factory.blueprint('App/Models/Area', (faker, i, data) => {
 Factory.blueprint('App/Models/Question', (faker, i, data) => {
   return {
     description: data.description || faker.description(),
+  };
+});
+
+Factory.blueprint('App/Models/AreasQuestion', (faker, i, data) => {
+  return {
+    area_id: data.area_id,
+    question_id: data.question_id,
     positiveIsRisk: data.positiveIsRisk,
   };
 });

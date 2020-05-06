@@ -4,10 +4,10 @@ const Question = use('App/Models/Question');
 const Database = use('Database');
 const Validator = use('Validator');
 const Student = use('App/Models/Student');
-const View = use('View');
+
 
 class QuestionnaireController {
-  async questionnaire({ request, response, params }) {
+  async questionnaire({ request, response, params, view }) {
     const page = params.page || 1;
     const questions = await Question.query().paginate(page, 10);
     const pagination = questions.toJSON();
@@ -18,10 +18,10 @@ class QuestionnaireController {
     const data = {
       questions,
     };
-    return View.render('questionnaire', { questions: pagination });
+    return view.render('questionnaire', { questions: pagination });
   }
 
-  async access({ request, response, params }) {
+  async access({ request, response, params, view }) {
     const parameters = request.all();
 
     const rules = {
@@ -63,6 +63,15 @@ class QuestionnaireController {
         response.status(400).send(error);
       }
     }
+  }
+
+  async SaveAnswers({ request, response, view }) {
+        response.redirect('/contact');
+
+  }
+
+  async showEnd({ request, response, params,view }) {
+    return view.render('/about');
   }
 }
 module.exports = QuestionnaireController;
