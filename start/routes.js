@@ -60,10 +60,10 @@ Route.on('/manual-school-form')
   .middleware(['auth']);
 
 //POST
-Route.post('/generarClave', 'GroupController.saveManual');
-Route.post('/generarClaves', 'GroupController.saveAutomatic');
+Route.post('/generar-clave', 'GroupController.saveManual').as('generateKey');
+Route.post('/generar-claves', 'GroupController.saveAutomatic').as('generateKeys');
 
-Route.get('/clave', 'GroupController.showKeys');
+Route.get('/claves', 'GroupController.showKeys').as('accessKeys');
 
 Route.on('/statistics')
   .render('school-info')
