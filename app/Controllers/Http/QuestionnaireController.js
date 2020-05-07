@@ -4,10 +4,10 @@ const Question = use('App/Models/Question');
 const Database = use('Database');
 const Validator = use('Validator');
 const Student = use('App/Models/Student');
-const View = use('View');
+
 
 class QuestionnaireController {
-  async questionnaire({ request, response, params }) {
+  async questionnaire({ request, response, params, view }) {
     const page = params.page || 1;
     const questions = await Question.query().paginate(page, 10);
     const pagination = questions.toJSON();
@@ -18,10 +18,10 @@ class QuestionnaireController {
     const data = {
       questions,
     };
-    return View.render('questionnaire', { questions: pagination });
+    return view.render('questionnaire', { questions: pagination });
   }
 
-  async access({ request, response, params }) {
+  async access({ request, response, params, view }) {
     const parameters = request.all();
 
     const rules = {
@@ -37,10 +37,8 @@ class QuestionnaireController {
     const { name, gender, age, schedule, student_code } = parameters;
 
     if (validate.fails()) {
-      var error = {
-        msg: 'Datos faltantes',
-      };
-      response.status(400).send(error);
+      //Datos faltantes
+      response.redirect('/student-warning')
     } else {
       const group = await Database.table('groups')
         .where('studentsAccessKey', student_code)
@@ -57,12 +55,15 @@ class QuestionnaireController {
         student.save();
         response.redirect('/student-questionnaire/1');
       } else {
-        var error = {
-          msg: 'Clave no encontrada',
-        };
-        response.status(400).send(error);
+        //Clave no encontrada
+        response.redirect('/student-error')
       }
     }
+  }
+
+  async SaveAnswers({ request, response, view }) {
+        response.redirect('/contact-end-questionnaire');
+
   }
 }
 module.exports = QuestionnaireController;
