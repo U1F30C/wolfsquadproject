@@ -34,7 +34,9 @@
     "pg": "^7.18.2",
     "sqlite3": "^4.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  },
   "autoload": {
     "App": "./app"
   }
