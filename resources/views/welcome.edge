@@ -1,13 +1,16 @@
 @layout('layouts.master')
 @section('content')
-    <div class="text-center highlight-clean">
-        <div class="intro">
-            <h2 class="text-center">Ingresa</h2>
-        </div>
-        <div class="buttons">
-
-            <a class="btn btn-primary" role="button" href="{{route('student')}}">Estudiante</a>
-            <a class="btn btn-light" role="button" href="{{route('professor')}}">Profesor</a>
-        </div>
-    </div>
+<div class="text-center highlight-clean">
+  <div class="intro">
+    <h2 class="text-center">Ingresa</h2>
+  </div>
+  <div class="buttons">
+    <a class="btn btn-primary" role="button" href="{{route('student')}}"
+      >Estudiante</a
+    >
+    <a class="btn btn-light" role="button" href="{{route('professor')}}"
+      >Profesor</a
+    >
+  </div>
+</div>
 @endsection
