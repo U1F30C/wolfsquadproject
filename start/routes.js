@@ -17,8 +17,8 @@
 const Route = use('Route');
 
 Route.on('/').render('welcome').as('welcome');
-Route.post('/login', 'UserController.login');
-Route.post('/logout', 'UserController.logout');
+Route.post('/login', 'UserController.login').as('login');
+Route.post('/logout', 'UserController.logout').as('logout');
 Route.on('/about').render('about').as('about');
 Route.on('/contact').render('contact').as('contact');
 
@@ -27,7 +27,7 @@ Route.on('/contact').render('contact').as('contact');
 | Admin
 |--------------------------------------------------------------------------
 */
-Route.on('/login').render('log-in').as('login').middleware(['guest']);
+Route.on('/login').render('log-in').as('loginForm').middleware(['guest']);
 
 Route.on('/recover_password')
   .render('recover-password')

@@ -16,7 +16,7 @@ class GroupController {
     let group = request.input('grupo');
     await this.createGroup(grade, group, schoolId, schoolName);
     
-    response.route('accessKey', {})
+    response.route('accessKeys', {})
   }
 
   async saveAutomatic({ request, response }) {
