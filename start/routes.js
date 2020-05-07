@@ -63,7 +63,7 @@ Route.on('/manual-school-form')
 Route.post('/generar-clave', 'GroupController.saveManual').as('generateKey');
 Route.post('/generar-claves', 'GroupController.saveAutomatic').as('generateKeys');
 
-Route.get('/claves', 'GroupController.showKeys').as('accessKeys');
+Route.get('/claves/:id', 'GroupController.showKeys').as('accessKeys');
 
 Route.on('/statistics')
   .render('school-info')

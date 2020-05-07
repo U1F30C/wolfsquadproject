@@ -15,8 +15,8 @@ class GroupController {
     let grade = request.input('grado');
     let group = request.input('grupo');
     await this.createGroup(grade, group, schoolId, schoolName);
-    
-    response.route('accessKeys', {})
+
+    response.route('accessKeys', { id: `${school.id}` });
   }
 
   async saveAutomatic({ request, response }) {
@@ -36,7 +36,7 @@ class GroupController {
       }
     }
 
-    response.route('accessKeys', {})
+    response.route('accessKeys', { id: `${school.id}` });
   }
 
   async createGroup(grade, groupLetter, schoolId, schoolName) {
@@ -69,16 +69,12 @@ class GroupController {
     await group.save();
   }
 
-  async showKeys({ view }){
-    let ids =  await Database.select('school_id').from('groups');
-    let cantidadIds = ids.length;
-    let ultimoID = ids[cantidadIds - 1]['school_id'];
-
+  async showKeys({ view, params }) {
     let schools_groups = await Database.table('groups')
       .innerJoin('schools', 'groups.school_id', 'schools.id')
-      .where('groups.school_id', ultimoID);
-    
-    return view.render('clave', {schools_groups});
+      .where('groups.school_id', params.id);
+
+    return view.render('clave', { schools_groups });
   }
 }
 
