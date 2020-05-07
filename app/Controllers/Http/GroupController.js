@@ -69,7 +69,7 @@ class GroupController {
     await group.save();
   }
 
-  async mostrarClaves({ view }){
+  async showKeys({ view }){
     let ids =  await Database.select('school_id').from('groups');
     let cantidadIds = ids.length;
     let ultimoID = ids[cantidadIds - 1]['school_id'];
