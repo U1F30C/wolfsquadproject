@@ -1,19 +1,3 @@
-'use strict';
-
-/*
-|--------------------------------------------------------------------------
-| QuestionSeeder
-|--------------------------------------------------------------------------
-|
-| Make use of the Factory instance to seed database with dummy data or
-| make use of Lucid models directly.
-|
-*/
-
-/** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory');
-const Database = use('Database');
-
 const questionStrings = {
   1: '¿Eres arrogante?',
   2: '¿Has tenido dificultades porque consumes drogas o bebidas alcohólicas en la escuela?',
@@ -98,16 +82,4 @@ const questionStrings = {
   81: '¿Gritas mucho?',
 };
 
-class QuestionSeeder {
-  async run() {
-    let questions = Object.values(questionStrings).map(
-      async (question) =>
-        await Factory.model('App/Models/Question').create({
-          description: question,
-        })
-    );
-    Database.table('questions').insert(questions);
-  }
-}
-
-module.exports = QuestionSeeder;
+module.exports = questionStrings;

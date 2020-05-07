@@ -1,8 +1,9 @@
 @layout('layouts.master')
 @section('content')
     <h1 class="text-center">Cuestionario</h1>
-    <form class="text-center" action="/student-questionnarie-end">
-        <div> 
+    <form class="text-center" method="post" action="/student-questionnaire-end">
+      {{csrfField()}}
+        <div>
         @each(question in questions.data)
             <fieldset>
                 <legend>{{question.id}} - {{ question.description }} </legend>
@@ -20,13 +21,13 @@
                         No
                     </label>
                 </div>
-                
+
             </fieldset>
         @endeach
-        
+
         </div>
 
-    
+
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
@@ -43,8 +44,9 @@
             </li>
         </ul>
     </nav>
+      @if(questions.page == questions.lastPage)
+      <button class="btn btn-primary" type="submit">Enviar mis respuestas</button>
+      @endif
 
-        <button class="btn btn-primary" type="submit" disabled>Enviar</button>
     </form>
-
 @endsection
