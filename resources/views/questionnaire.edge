@@ -1,52 +1,72 @@
 @layout('layouts.master')
 @section('content')
-    <h1 class="text-center">Cuestionario</h1>
-    <form class="text-center" method="post" action="/student-questionnaire-end">
-      {{csrfField()}}
-        <div>
-        @each(question in questions.data)
-            <fieldset>
-                <legend>{{question.id}} - {{ question.description }} </legend>
+<h1 class="text-center">Cuestionario</h1>
+<form class="text-center" method="post" action="/student-questionnaire-end">
+  {{csrfField()}}
+  <div>
+    @each(question in questions.data)
+    <fieldset>
+      <legend>{{question.id}} - {{ question.description }}</legend>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="chBoxNo_{{question.id}}" id="chBoxYes_{{question.id}}" value="1" checked>
-                    <label class="form-check-label" for="chBoxYes_{{question.id}}">
-                        Si
-                    </label>
-                </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="chBoxNo_{{question.id}}"
+          id="chBoxYes_{{question.id}}"
+          value="1"
+          checked
+        />
+        <label class="form-check-label" for="chBoxYes_{{question.id}}">
+          Si
+        </label>
+      </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="chBoxNo_{{question.id}}" id="chBoxNo_{{question.id}}" value="0">
-                    <label class="form-check-label" for="chBoxNo_{{question.id}}">
-                        No
-                    </label>
-                </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="chBoxNo_{{question.id}}"
+          id="chBoxNo_{{question.id}}"
+          value="0"
+        />
+        <label class="form-check-label" for="chBoxNo_{{question.id}}">
+          No
+        </label>
+      </div>
+    </fieldset>
+    @endeach
+  </div>
 
-            </fieldset>
-        @endeach
-
-        </div>
-
-
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item {{ (questions.page == 1) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ (questions.page == 1) ? 'javascript:;' : route('questions', {page: questions.page - 1}) }}">Anterior</a>
-            </li>
-            @each(page in questions.pages)
-                <li class="page-item {{ (questions.page == page) ? 'active': '' }}">
-                <a class="page-link" href="{{ route('questions', {page: page}) }}">{{ page }}</a>
-                </li>
-            @endeach
-            <li class="page-item {{ (questions.page == questions.lastPage) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ (questions.page == questions.lastPage) ? 'javascript:;' : route('questions', {page: questions.page + 1}) }}">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
-      @if(questions.page == questions.lastPage)
-      <button class="btn btn-primary" type="submit">Enviar mis respuestas</button>
-      @endif
-
-    </form>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item {{ (questions.page == 1) ? 'disabled' : '' }}">
+        <a
+          class="page-link"
+          href="{{ (questions.page == 1) ? 'javascript:;' : route('questions', {page: questions.page - 1}) }}"
+          >Anterior</a
+        >
+      </li>
+      @each(page in questions.pages)
+      <li class="page-item {{ (questions.page == page) ? 'active': '' }}">
+        <a class="page-link" href="{{ route('questions', {page: page}) }}"
+          >{{ page }}</a
+        >
+      </li>
+      @endeach
+      <li
+        class="page-item {{ (questions.page == questions.lastPage) ? 'disabled' : '' }}"
+      >
+        <a
+          class="page-link"
+          href="{{ (questions.page == questions.lastPage) ? 'javascript:;' : route('questions', {page: questions.page + 1}) }}"
+          >Siguiente</a
+        >
+      </li>
+    </ul>
+  </nav>
+  @if(questions.page == questions.lastPage)
+  <button class="btn btn-primary" type="submit">Enviar mis respuestas</button>
+  @endif
+</form>
 @endsection

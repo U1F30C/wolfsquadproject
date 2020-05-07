@@ -1,51 +1,61 @@
 @layout('layouts.master')
 @section('content')
 
-<form action = "{{route('generateKeys')}}" method="POST">
-    {{ csrfField() }}
-    <div class="row text-center">
-        <div class="col">
-            <h1>Formulario Automatico</h1>
-            <h1>Crear Escuela</h1>
-            <input type="text" placeholder="Nombre de la escuela", name="school_name">
-        </div>
+<form action="{{route('generateKeys')}}" method="POST">
+  {{ csrfField() }}
+  <div class="row text-center">
+    <div class="col">
+      <h1>Formulario Automatico</h1>
+      <h1>Crear Escuela</h1>
+      <input
+        type="text"
+        placeholder="Nombre de la escuela"
+        ,
+        name="school_name"
+      />
     </div>
-    
-    <div class="row text-center">
+  </div>
 
-        <div class="col">
-            <h1 class="text-center">Grado</h1>
-            <select name='grado'>
-                <optgroup label="Grados">
-                    <option value="1" selected="">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </optgroup>
-            </select>
-        </div>
-        
-        <div class="col">
-            <h1>Grupo</h1>
-            <select name='grupo'>
-                <optgroup label="Grupo">
-                    <option value="A" selected="">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                </optgroup>
-            </select>
-        </div>
+  <div class="row text-center">
+    <div class="col">
+      <h1 class="text-center">Grado</h1>
+      <select name="grado">
+        <optgroup label="Grados">
+          <option value="1" selected="">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </optgroup>
+      </select>
     </div>
-    
-    <div class="row text-center">
-        <div class="col">
-            <button class="btn btn-primary" type="submit" style="background-color: rgb(0,178,255);">Generar claves</button>
-        </div>
+
+    <div class="col">
+      <h1>Grupo</h1>
+      <select name="grupo">
+        <optgroup label="Grupo">
+          <option value="A" selected="">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+        </optgroup>
+      </select>
     </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        style="background-color: rgb(0, 178, 255);"
+      >
+        Generar claves
+      </button>
+    </div>
+  </div>
 </form>
 
 @endsection

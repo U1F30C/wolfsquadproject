@@ -1,29 +1,46 @@
 @layout('layouts.master')
 @section('content')
-    <div class="container text-center">
-        <form action="../">
+<div class="container text-center">
+  <form action="../">
+    <h1>Crear Escuelas</h1>
+    <h1>Grupos</h1>
 
-            <h1>Crear Escuelas</h1>
-            <h1>Grupos</h1>
-            
-            <fieldset>
-                <div class="form-check">
-                    <label><input type="radio" name="option" value="{{route('manualForm')}}">Manual</label>
-                </div>
+    <fieldset>
+      <div class="form-check">
+        <label
+          ><input
+            type="radio"
+            name="option"
+            value="{{route('manualForm')}}"
+          />Manual</label
+        >
+      </div>
 
-                <div class="form-check">
-                    <label><input type="radio" name="option" value="{{route('automaticForm')}}">Automatico</label>
-                </div>
-                
-                <button class="btn btn-dark" type="button" value="Go" onclick="
+      <div class="form-check">
+        <label
+          ><input
+            type="radio"
+            name="option"
+            value="{{route('automaticForm')}}"
+          />Automatico</label
+        >
+      </div>
+
+      <button
+        class="btn btn-dark"
+        type="button"
+        value="Go"
+        onclick="
                     ob=this.form.option;
                     for(i=0;i<ob.length;i++){
                         if(ob[i].checked)
                             window.open(ob[i].value,'_self');
                         ;
-                    }">Crear
-                </button>
-            </fieldset>
-        </form>
-    </div>
+                    }"
+      >
+        Crear
+      </button>
+    </fieldset>
+  </form>
+</div>
 @endsection

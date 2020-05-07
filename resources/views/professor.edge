@@ -1,18 +1,22 @@
 @layout('layouts.master')
 @section('content')
-    <div class="container text-center justify-content-center m-auto" style="margin: 0px;padding: 0px;height: 272px;">
-        <h1>Profesor</h1>
-         
+<div
+  class="container text-center justify-content-center m-auto"
+  style="margin: 0px; padding: 0px; height: 272px;"
+>
+  <h1>Profesor</h1>
 
-    <form method="POST" action="{{route('teacherAccess')}}">
-            
-            {{ csrfField()}}
-            <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave" name="teacher_code" id="teacher_code">
+  <form method="POST" action="{{route('teacherAccess')}}">
+    {{ csrfField()}}
+    <input
+      class="form-control form-control-lg text-input"
+      type="text"
+      placeholder="Ingresa la clave"
+      name="teacher_code"
+      id="teacher_code"
+    />
 
-            <button class="btn btn-primary" type="submit" >Ingresar</button>
-
-        </form>
-    
-
-    </div>
+    <button class="btn btn-primary" type="submit">Ingresar</button>
+  </form>
+</div>
 @endsection
