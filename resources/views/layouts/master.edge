@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <head>
     @component('components.head')
     @endcomponent
     @section('title')
@@ -14,17 +15,16 @@
     </header>
 
     <div class="container">
-
-        <div class="content">
-            @!section('content')
-        </div>
+      <div class="content">
+        @!section('content')
       </div>
       <div class="footer-basic">
         <footer>
           <a class="rounded scroll-to-top" href="#page-top">
           @component('components.footer')
           @endcomponent
-      </footer>
+        </footer>
+      </div>
     </div>
   </body>
 </html>
