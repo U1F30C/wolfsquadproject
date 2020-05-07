@@ -8,7 +8,7 @@ class GroupController {
   async saveManual({ request, response }) {
     const school = new School();
     const schoolName = request.input('school_name');
-    school.nameSchool = schoolName;
+    school.school_name = schoolName;
     await school.save();
     const schoolId = school.id;
 
@@ -22,7 +22,7 @@ class GroupController {
   async saveAutomatic({ request, response }) {
     const school = new School();
     const schoolName = request.input('school_name');
-    school.nameSchool = schoolName;
+    school.school_name = schoolName;
     await school.save();
     const schoolId = school.id;
 

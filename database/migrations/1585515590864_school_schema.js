@@ -7,7 +7,7 @@ class SchoolSchema extends Schema {
   up() {
     this.create('schools', (table) => {
       table.increments();
-      table.string('nameSchool').notNullable();;
+      table.string('school_name').notNullable();;
       table.timestamps();
     });
   }

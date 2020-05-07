@@ -18,12 +18,12 @@
                 </tr>
             </thead>
             <tbody>
-                @each(clave in schools_groups)
+                @each(group in schools_groups)
                     <tr>
-                        <td>{{ clave.nameSchool}}</td>
-                        <td>{{ clave.name }}</td>
-                        <td>{{ clave.studentsAccessKey }}</td>
-                        <td>{{ clave.teachersAccessKey }}</td>
+                        <td>{{ group.school_name}}</td>
+                        <td>{{ group.name }}</td>
+                        <td>{{ group.studentsAccessKey }}</td>
+                        <td>{{ group.teachersAccessKey }}</td>
                     </tr>
                 @endeach
             </tbody>
