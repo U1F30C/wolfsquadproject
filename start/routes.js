@@ -17,8 +17,8 @@
 const Route = use('Route');
 
 Route.on('/').render('welcome').as('welcome');
-Route.post('/login', 'UserController.login');
-Route.post('/logout', 'UserController.logout');
+Route.post('/login', 'UserController.login').as('login');
+Route.post('/logout', 'UserController.logout').as('logout');
 Route.on('/about').render('about').as('about');
 Route.on('/contact').render('contact').as('contact');
 
@@ -27,7 +27,7 @@ Route.on('/contact').render('contact').as('contact');
 | Admin
 |--------------------------------------------------------------------------
 */
-Route.on('/login').render('log-in').as('login').middleware(['guest']);
+Route.on('/login').render('log-in').as('loginForm').middleware(['guest']);
 
 Route.on('/recover_password')
   .render('recover-password')
@@ -54,15 +54,16 @@ Route.on('/automatic-school-form')
   .as('automaticForm')
   .middleware(['auth']);
 
-//GET
 Route.on('/manual-school-form')
   .render('school-manual-form')
   .as('manualForm')
   .middleware(['auth']);
 
 //POST
-Route.post('/clave', 'GroupController.saveManual');
-Route.post('/claves', 'GroupController.saveAutomatic');
+Route.post('/generar-clave', 'GroupController.saveManual').as('generateKey');
+Route.post('/generar-claves', 'GroupController.saveAutomatic').as('generateKeys');
+
+Route.get('/claves/:id', 'GroupController.showKeys').as('accessKeys');
 
 Route.on('/statistics')
   .render('school-info')
@@ -94,6 +95,7 @@ Route.on('/student-warning').render('student').as('student');
 Route.post('/student-access', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
+
 Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
   'questions'
 );

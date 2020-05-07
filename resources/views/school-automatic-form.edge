@@ -1,7 +1,7 @@
 @layout('layouts.master')
 @section('content')
 
-<form action = "/claves" method="POST">
+<form action = "{{route('generateKeys')}}" method="POST">
     {{ csrfField() }}
     <div class="row text-center">
         <div class="col">

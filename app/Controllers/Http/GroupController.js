@@ -1,13 +1,14 @@
 'use strict';
 const School = use('App/Models/School');
 const Group = use('App/Models/Group');
+const Database = use('Database');
 const Hash = use('Hash');
 
 class GroupController {
   async saveManual({ request, response }) {
     const school = new School();
     const schoolName = request.input('school_name');
-    school.name = schoolName;
+    school.school_name = schoolName;
     await school.save();
     const schoolId = school.id;
 
@@ -15,13 +16,13 @@ class GroupController {
     let group = request.input('grupo');
     await this.createGroup(grade, group, schoolId, schoolName);
 
-    return response.redirect('/schools');
+    response.route('accessKeys', { id: `${school.id}` });
   }
 
   async saveAutomatic({ request, response }) {
     const school = new School();
     const schoolName = request.input('school_name');
-    school.name = schoolName;
+    school.school_name = schoolName;
     await school.save();
     const schoolId = school.id;
 
@@ -34,7 +35,8 @@ class GroupController {
         await this.createGroup(grade, groupLetter, schoolId, schoolName);
       }
     }
-    return response.redirect('/schools');
+
+    response.route('accessKeys', { id: `${school.id}` });
   }
 
   async createGroup(grade, groupLetter, schoolId, schoolName) {
@@ -65,6 +67,14 @@ class GroupController {
     group.teachersAccessKey = group.id + group.teachersAccessKey;
 
     await group.save();
+  }
+
+  async showKeys({ view, params }) {
+    let schools_groups = await Database.table('groups')
+      .innerJoin('schools', 'groups.school_id', 'schools.id')
+      .where('groups.school_id', params.id);
+
+    return view.render('clave', { schools_groups });
   }
 }
 

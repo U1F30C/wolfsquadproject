@@ -11,7 +11,7 @@
             <strong>¡Error!</strong>  Por favor llena toda la información para continuar.
           </div>
         @endif
-        <form method="POST" action="/student-access">
+        <form method="POST" action="{{route('questionnaireAccess')}}">
 
             {{ csrfField()}}
 

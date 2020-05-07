@@ -4,7 +4,7 @@
         <h1>Profesor</h1>
          
 
-        <form method="POST" action="/teacher-access">
+    <form method="POST" action="{{route('teacherAccess')}}">
             
             {{ csrfField()}}
             <input class="form-control form-control-lg text-input" type="text" placeholder="Ingresa la clave" name="teacher_code" id="teacher_code">
