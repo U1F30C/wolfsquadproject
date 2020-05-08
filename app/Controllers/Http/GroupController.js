@@ -70,11 +70,11 @@ class GroupController {
   }
 
   async showKeys({ view, params }) {
-    let schools_groups = await Database.table('groups')
+    let groups = await Database.table('groups')
       .innerJoin('schools', 'groups.school_id', 'schools.id')
       .where('groups.school_id', params.id);
 
-    return view.render('clave', { schools_groups });
+    return view.render('codeTable', { groups });
   }
 }
 
