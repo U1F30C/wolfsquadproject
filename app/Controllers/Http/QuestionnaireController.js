@@ -37,7 +37,6 @@ class QuestionnaireController {
     const { name, gender, age, schedule, student_code } = parameters;
 
     if (validate.fails()) {
-      //Datos faltantes
       response.redirect('/student-warning')
     } else {
       const group = await Database.table('groups')
@@ -55,13 +54,12 @@ class QuestionnaireController {
         student.save();
         response.redirect('/student-questionnaire/1');
       } else {
-        //Clave no encontrada
         response.redirect('/student-error')
       }
     }
   }
 
-  async SaveAnswers({ request, response, view }) {
+  async saveAnswers({ request, response, view }) {
         response.redirect('/contact-end-questionnaire');
 
   }

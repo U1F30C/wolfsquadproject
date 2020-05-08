@@ -104,6 +104,6 @@ Route.get(
 ).as('questions');
 Route.post(
   '/student-questionnaire-end',
-  'QuestionnaireController.SaveAnswers'
+  'QuestionnaireController.saveAnswers'
 ).as('saveAnswers');
 Route.on('/contact-end-questionnaire').render('contact').as('contact');
