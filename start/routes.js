@@ -61,7 +61,9 @@ Route.on('/manual-school-form')
 
 //POST
 Route.post('/generar-clave', 'GroupController.saveManual').as('generateKey');
-Route.post('/generar-claves', 'GroupController.saveAutomatic').as('generateKeys');
+Route.post('/generar-claves', 'GroupController.saveAutomatic').as(
+  'generateKeys'
+);
 
 Route.get('/claves/:id', 'GroupController.showKeys').as('accessKeys');
 
@@ -96,9 +98,12 @@ Route.post('/student-access', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
 
-Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
-  'questions'
-);
-Route.post('/student-questionnaire-end','QuestionnaireController.SaveAnswers').as('saveAnswers');
+Route.get(
+  '/student-questionnaire/:page',
+  'QuestionnaireController.questionnaire'
+).as('questions');
+Route.post(
+  '/student-questionnaire-end',
+  'QuestionnaireController.SaveAnswers'
+).as('saveAnswers');
 Route.on('/contact-end-questionnaire').render('contact').as('contact');
-
