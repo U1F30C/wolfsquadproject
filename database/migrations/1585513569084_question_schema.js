@@ -13,6 +13,13 @@ class QuestionSchema extends Schema {
   }
 
   down() {
+    this.hasTable('areas_questions').then((exists) => {
+      if (exists) {
+        this.alter('areas_questions', function (table) {
+          table.dropColumn('question_id');
+        });
+      }
+    });
     this.drop('questions');
   }
 }

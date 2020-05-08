@@ -15,6 +15,13 @@ class UserSchema extends Schema {
   }
 
   down() {
+    this.hasTable('token').then((exists) => {
+      if (exists) {
+        this.alter('token', function (table) {
+          table.dropColumn('user_id');
+        });
+      }
+    });
     this.drop('users');
   }
 }

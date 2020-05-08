@@ -10,12 +10,16 @@ class AreaSchema extends Schema {
       table.string('name', 80).notNullable();
       table.timestamps();
     });
-    this.alter('questions', (table) => {
-      table.integer('area_id').unsigned().references('id').inTable('areas');
-    });
   }
 
   down() {
+    this.hasTable('areas_questions').then((exists) => {
+      if (exists) {
+        this.alter('areas_questions', function (table) {
+          table.dropColumn('area_id');
+        });
+      }
+    });
     this.drop('areas');
   }
 }
