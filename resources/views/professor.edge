@@ -6,6 +6,15 @@
 >
   <h1>Profesor</h1>
 
+  @if(old('type') && old('type') == 'warning')
+  <div class="alert alert-warning">
+    {{old('message')}}
+  </div>
+  @elseif(old('type') && old('type') == 'error')
+  <div class="alert alert-warning">
+    {{old('message')}}
+  </div>
+  @endif
   <form method="POST" action="{{route('teacherAccess')}}">
     {{ csrfField()}}
     <input

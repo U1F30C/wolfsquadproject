@@ -20,23 +20,34 @@ class QuestionnaireController {
     return view.render('questionnaire', { questions: pagination });
   }
 
-  async access({ request, response, params, view }) {
+  async access({ request, response, session }) {
     const parameters = request.all();
 
     const rules = {
-      student_code: 'required',
+      student_code: 'required|code',
       name: 'required',
       gender: 'required',
       age: 'required',
       schedule: 'required',
     };
 
-    const validate = await Validator.validate(parameters, rules);
+    const messages = {
+      'student_code.required':
+        '¡Error! Por favor llena toda la información para continuar.',
+      'student_code.code':
+        '¡Error! El código que ingresaste no es válido.',
+    };
+
+    const validate = await Validator.validate(parameters, rules, messages);
 
     const { name, gender, age, schedule, student_code } = parameters;
 
     if (validate.fails()) {
-      response.redirect('/student-warning');
+      session.flash({
+        type: 'warning',
+        message: validate.messages()[0].message,
+      });
+      response.route('student', {});
     } else {
       const group = await Database.table('groups')
         .where({
@@ -54,15 +65,22 @@ class QuestionnaireController {
         student.group_id = group.id;
 
         student.save();
-        response.redirect('/student-questionnaire/1');
+        response.route('questionnaire', { page: 1 });
       } else {
-        response.redirect('/student-error');
+        session.flash({
+          type: 'error',
+          message: '¡Error! No encontramos la clave, confirma tu información.',
+        });
+        response.route('student', {});
       }
     }
   }
 
-  async saveAnswers({ request, response, view }) {
-    response.redirect('/contact-end-questionnaire');
+  async saveAnswers({ response, session }) {
+    session.flash({
+      message: '¡Gracias por responder! Estamos a tu servicio ,contáctanos.',
+    });
+    response.route('done', {});
   }
 }
 module.exports = QuestionnaireController;

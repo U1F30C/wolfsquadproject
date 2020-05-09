@@ -3,10 +3,9 @@
 <div class="text-center">
   <div class="container-fluid">
     <h1>Información de contacto</h1>
-    @if(url=='/contact-end-questionnaire')
+    @if(old('message'))
     <div class="alert alert-success">
-      <strong>¡Gracias por responder!</strong> Estamos a tu servicio,
-      contactanos.
+      {{ old('message') }}
     </div>
     @endif
     <hr />

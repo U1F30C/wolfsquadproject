@@ -1,7 +1,7 @@
 @layout('layouts.master')
 @section('content')
 <h1 class="text-center">Cuestionario</h1>
-<form class="text-center" method="post" action="/student-questionnaire-end">
+<form class="text-center" method="post" action="{{ route('finish') }}">
   {{csrfField()}}
   <div>
     @each(question in questions.data)

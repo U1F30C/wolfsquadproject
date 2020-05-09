@@ -19,8 +19,8 @@ const Route = use('Route');
 Route.on('/').render('welcome').as('welcome');
 Route.post('/login', 'UserController.login').as('login');
 Route.post('/logout', 'UserController.logout').as('logout');
-Route.on('/about').render('about').as('about');
-Route.on('/contact').render('contact').as('contact');
+Route.on('/informacion').render('about').as('about');
+Route.on('/contacto').render('contact').as('contact');
 
 /*
 |--------------------------------------------------------------------------
@@ -29,32 +29,27 @@ Route.on('/contact').render('contact').as('contact');
 */
 Route.on('/login').render('log-in').as('loginForm').middleware(['guest']);
 
-Route.on('/recover_password')
+Route.on('/recuperar-contrasena')
   .render('recover-password')
   .as('passwordRecovery')
   .middleware(['guest']);
 
-Route.on('/new_password')
+Route.on('/cambiar-contrasena')
   .render('new-password')
   .as('passwordChange')
   .middleware(['auth']);
 
-Route.on('/new_email')
-  .render('new-email')
-  .as('emailChange')
-  .middleware(['auth']);
-
-Route.on('/schools')
+Route.on('/escuelas')
   .render('create-schools-form')
   .as('schoolsManagement')
   .middleware(['auth']);
 
-Route.on('/automatic-school-form')
+Route.on('/generar-grupos')
   .render('school-automatic-form')
   .as('automaticForm')
   .middleware(['auth']);
 
-Route.on('/manual-school-form')
+Route.on('/generar-grupo')
   .render('school-manual-form')
   .as('manualForm')
   .middleware(['auth']);
@@ -82,28 +77,26 @@ Route.on('/statistics-classroom')
 | Teacher
 |--------------------------------------------------------------------------
 */
-Route.on('/professor').render('professor').as('professor');
+Route.on('/profesor').render('professor').as('professor');
 Route.on('/professor-list').render('professor-list').as('groupAnswersList');
-Route.post('/teacher-access', 'TeacherController.index').as('teacherAccess');
+Route.post('/lista-respuestas', 'TeacherController.list').as('teacherAccess');
 
 /*
 |--------------------------------------------------------------------------
 | Student
 |--------------------------------------------------------------------------
 */
-Route.on('/student').render('student').as('student');
-Route.on('/student-error').render('student').as('student');
-Route.on('/student-warning').render('student').as('student');
-Route.post('/student-access', 'QuestionnaireController.access').as(
+Route.on('/estudiante').render('student').as('student');
+Route.post('/encuesta', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
 
 Route.get(
-  '/student-questionnaire/:page',
+  '/cuestionario/:page',
   'QuestionnaireController.questionnaire'
-).as('questions');
+).as('questionnaire');
 Route.post(
-  '/student-questionnaire-end',
+  '/terminar',
   'QuestionnaireController.saveAnswers'
-).as('saveAnswers');
-Route.on('/contact-end-questionnaire').render('contact').as('contact');
+).as('finish');
+Route.on('/terminado').render('contact').as('done');
