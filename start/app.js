@@ -20,7 +20,8 @@ const providers = [
   '@adonisjs/shield/providers/ShieldProvider',
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
-  '@adonisjs/validator/providers/ValidatorProvider'
+  '@adonisjs/validator/providers/ValidatorProvider',
+  '@adonisjs/mail/providers/MailProvider'
 ]
 
 /*
@@ -43,12 +44,12 @@ const aceProviders = [
 |
 | Aliases are short unique names for IoC container bindings. You are free
 | to create your own aliases.
-| 
+|
 | For example:
 |   { Route: 'Adonis/Src/Route' }
 |
 */
-const aliases = { 
+const aliases = {
 }
 
 /*

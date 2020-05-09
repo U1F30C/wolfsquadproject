@@ -118,7 +118,7 @@ class AreaQuestionSeeder {
           Relation,
         )
     );
-    Database.table('questions').insert(areaQuestions);
+    Database.table('areas_questions').insert(areaQuestions);
   }
 }
 

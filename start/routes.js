@@ -28,7 +28,7 @@ Route.on('/contact').render('contact').as('contact');
 |--------------------------------------------------------------------------
 */
 Route.on('/login').render('log-in').as('login').middleware(['guest']);
-
+Route.post('/getPassword','UserController.forgotPassword').as('getPassword');
 Route.on('/recover_password')
   .render('recover-password')
   .as('passwordRecovery')
@@ -97,6 +97,6 @@ Route.post('/student-access', 'QuestionnaireController.access').as(
 Route.get('/student-questionnaire/:page', 'QuestionnaireController.questionnaire').as(
   'questions'
 );
-Route.post('/student-questionnaire-end','QuestionnaireController.SaveAnswers').as('saveAnswers');
+Route.post('/student-questionnaire-end/:page?','QuestionnaireController.SaveAnswers').as('saveAnswers');
 Route.on('/contact-end-questionnaire').render('contact').as('contact');
 
