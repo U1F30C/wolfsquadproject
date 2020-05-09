@@ -4,26 +4,25 @@
 <div class="container">
   <div class="row text-center">
     <div class="col">
-      <h1>Claves</h1>
+      <h1>{{ school.school_name }}</h1>
+      <h2>Códigos de acceso</h2>
     </div>
   </div>
 
   <table class="table table-hover table-bordered results">
     <thead>
       <tr>
-        <th class="col-md-3 col-xs-3">Escuela</th>
         <th class="col-md-3 col-xs-3">Grupo</th>
-        <th class="col-md-3 col-xs-3">Codigo Estudiante</th>
-        <th class="col-md-3 col-xs-3">Codigo Profesor</th>
+        <th class="col-md-3 col-xs-3">Código Estudiante</th>
+        <th class="col-md-3 col-xs-3">Código Profesor</th>
       </tr>
     </thead>
     <tbody>
       @each(group in groups)
       <tr>
-        <td>{{ group.school_name}}</td>
         <td>{{ group.name }}</td>
-        <td>{{ group.studentsAccessKey }}</td>
-        <td>{{ group.teachersAccessKey }}</td>
+        <td>{{ group.id + group.studentsAccessKey }}</td>
+        <td>{{ group.id + group.teachersAccessKey }}</td>
       </tr>
       @endeach
     </tbody>

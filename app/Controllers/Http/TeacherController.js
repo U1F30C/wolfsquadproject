@@ -1,10 +1,9 @@
 'use strict';
 const Database = use('Database');
-const View = use('View');
 const Validator = use('Validator');
 
 class TeacherController {
-  async index({ request, response, params }) {
+  async index({ request, response, params, view }) {
     const teacher_code = request.input('teacher_code');
 
     const rules = {
@@ -21,11 +20,14 @@ class TeacherController {
     }
 
     const group = await Database.table('groups')
-      .where('teachersAccessKey', teacher_code)
+      .where({
+        teachersAccessKey: teacher_code.slice(-4),
+        id: teacher_code.slice(0, -4),
+      })
       .first();
 
     if (group) {
-      return View.render('professor-index');
+      return view.render('professor-index');
     } else {
       var error = {
         msg: 'Registo no encontrado',

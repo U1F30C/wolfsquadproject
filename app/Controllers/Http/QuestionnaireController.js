@@ -5,7 +5,6 @@ const Database = use('Database');
 const Validator = use('Validator');
 const Student = use('App/Models/Student');
 
-
 class QuestionnaireController {
   async questionnaire({ request, response, params, view }) {
     const page = params.page || 1;
@@ -37,10 +36,13 @@ class QuestionnaireController {
     const { name, gender, age, schedule, student_code } = parameters;
 
     if (validate.fails()) {
-      response.redirect('/student-warning')
+      response.redirect('/student-warning');
     } else {
       const group = await Database.table('groups')
-        .where('studentsAccessKey', student_code)
+        .where({
+          studentsAccessKey: student_code.slice(-4),
+          id: student_code.slice(0, -4),
+        })
         .first();
 
       if (group) {
@@ -54,14 +56,13 @@ class QuestionnaireController {
         student.save();
         response.redirect('/student-questionnaire/1');
       } else {
-        response.redirect('/student-error')
+        response.redirect('/student-error');
       }
     }
   }
 
   async saveAnswers({ request, response, view }) {
-        response.redirect('/contact-end-questionnaire');
-
+    response.redirect('/contact-end-questionnaire');
   }
 }
 module.exports = QuestionnaireController;

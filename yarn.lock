@@ -603,6 +603,14 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bcrypt@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/bcrypt/-/bcrypt-4.0.1.tgz#06e21e749a061020e4ff1283c1faa93187ac57fe"
+  integrity sha512-hSIZHkUxIDS5zA2o00Kf2O5RfVbQ888n54xQoF/eIaquU4uaLxK8vhhBdktd0B3n2MjkcAWzv4mnhogykBKOUQ==
+  dependencies:
+    node-addon-api "^2.0.0"
+    node-pre-gyp "0.14.0"
+
 bcryptjs@^2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
@@ -1250,6 +1258,11 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
+
+fast-cartesian@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/fast-cartesian/-/fast-cartesian-5.0.0.tgz#3e1403b7c8b690ddaf6c992579e729eba56d8a02"
+  integrity sha512-FnvKkmMx/suq1s9Coagu3jqwNJDRWn2+QIv6LFSubXyys/kcBHRM3HFUoFQjENlUSsAh5qgcyJaU0aW8U+2Awg==
 
 fast-deep-equal@^3.1.1:
   version "3.1.1"
@@ -2319,6 +2332,11 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
+node-addon-api@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-2.0.0.tgz#f9afb8d777a91525244b01775ea0ddbe1125483b"
+  integrity sha512-ASCL5U13as7HhOExbT6OlWJJUV/lLzL2voOSP1UVehpRD8FbSrSDjfScK/KwAvVTI5AS6r4VwbOMlIqtvRidnA==
+
 node-cookie@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/node-cookie/-/node-cookie-2.1.2.tgz#4327c70e6a9bbe8c8ee86713bd9b534f655ec405"
@@ -2349,6 +2367,22 @@ node-guard@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-guard/-/node-guard-1.0.0.tgz#e4549beb791c3b1c842755a5273b73be8b080a34"
   integrity sha1-5FSb63kcOxyEJ1WlJztzvosICjQ=
+
+node-pre-gyp@0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.14.0.tgz#9a0596533b877289bcad4e143982ca3d904ddc83"
+  integrity sha512-+CvDC7ZttU/sSt9rFjix/P05iS43qHCOOGzcr3Ry99bXG7VX953+vFyEuph/tfqoYu8dttBkE86JSKBO2OzcxA==
+  dependencies:
+    detect-libc "^1.0.2"
+    mkdirp "^0.5.1"
+    needle "^2.2.1"
+    nopt "^4.0.1"
+    npm-packlist "^1.1.6"
+    npmlog "^4.0.2"
+    rc "^1.2.7"
+    rimraf "^2.6.1"
+    semver "^5.3.0"
+    tar "^4.4.2"
 
 node-pre-gyp@^0.11.0:
   version "0.11.0"
@@ -3536,7 +3570,7 @@ syntax-error@^1.1.4:
   dependencies:
     acorn-node "^1.2.0"
 
-tar@^4:
+tar@^4, tar@^4.4.2:
   version "4.4.13"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
   integrity sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
