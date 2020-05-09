@@ -67,10 +67,7 @@ class GroupController {
 
   async showKeys({ view, params }) {
     let school = (await Database.table('schools').where('id', params.id))[0];
-
     let groups = await Database.table('groups').where('school_id', params.id);
-    console.log(school);
-
     return view.render('codes-table', { groups, school });
   }
 }
