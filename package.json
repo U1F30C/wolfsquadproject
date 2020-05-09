@@ -31,10 +31,10 @@
     "@adonisjs/validator": "^5.0.6",
     "bcrypt": "^4.0.1",
     "fast-cartesian": "^5.0.0",
-    "knex": "^0.19.5",
+    "knex": "^0.21.1",
     "minimist": "^1.2.2",
-    "pg": "^7.18.2",
-    "sqlite3": "^4.1.1"
+    "pg": "^8.1.0",
+    "sqlite3": "^4.2.0"
   },
   "devDependencies": {
     "prettier": "^2.0.5"
