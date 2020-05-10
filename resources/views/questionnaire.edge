@@ -47,14 +47,16 @@
         name="page"
         value="{{questions.page }}"
       >
-        @if(questions.page == questions.lastPage) Enviar mis respuestas
-        <span class="pull-right">
-          <i class="fas fa-check"></i>
-        </span>
-        @else Siguiente
-        <span class="pull-right">
-          <i class="fas fa-angle-right"></i>
-        </span>
+        @if(questions.page == questions.lastPage)
+          Enviar mis respuestas
+          <span class="pull-right">
+            <i class="fas fa-check"></i>
+          </span>
+        @else
+          Siguiente
+          <span class="pull-right">
+            <i class="fas fa-angle-right"></i>
+          </span>
         @endif
       </button>
     </div>
