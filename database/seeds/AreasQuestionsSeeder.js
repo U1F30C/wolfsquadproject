@@ -38,8 +38,8 @@ class AreasQuestionsSeeder {
     Database.table('questions').insert(questions);
 
     let areaQuestions = Object.values(areaQuestionRelationships).map(
-      async (Relation) =>
-        await Factory.model('App/Models/AreasQuestions').create(Relation)
+      async (relation) =>
+        await Factory.model('App/Models/AreasQuestions').create(relation)
     );
     Database.table('areas_questions').insert(areaQuestions);
   }
