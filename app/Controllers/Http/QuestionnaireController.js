@@ -86,7 +86,7 @@ class QuestionnaireController {
     if (page == 9) {
       //End of the questionnaire
       let IdStudent = session.pull('studentId');
-      const Answer = use('App/Models/AnswerStudent');
+      const Answer = use('App/Models/Answer');
       for (let pageIndex = 1; pageIndex < 10; pageIndex++) {
         const pageAnswers = session.pull(pageIndex);
         const answersData = [];
