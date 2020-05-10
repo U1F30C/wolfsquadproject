@@ -41,3 +41,12 @@ Factory.blueprint('App/Models/AreasQuestions', (faker, i, data) => {
     positiveIsRisk: data.positiveIsRisk,
   };
 });
+
+Factory.blueprint('App/Models/Student', (faker, i, data) => {
+  return {
+    name: faker.name(),
+    age: faker.age({ type: 'teen' }),
+    gender: faker.character({ pool: 'FM' }),
+    schedule: faker.character({ pool: 'MV' }),
+  };
+});
