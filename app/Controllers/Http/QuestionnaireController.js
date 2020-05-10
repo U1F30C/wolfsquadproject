@@ -108,7 +108,7 @@ class QuestionnaireController {
       }
     } else {
       let nextPage = page + 1;
-      response.route('questionnaire', { nextPage: 1 });
+      response.route('questionnaire', { page: nextPage });
       return;
     }
   }
