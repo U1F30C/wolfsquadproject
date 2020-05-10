@@ -4,6 +4,7 @@ const Question = use('App/Models/Question');
 const Database = use('Database');
 const Validator = use('Validator');
 const Student = use('App/Models/Student');
+const { areas } = require('./../../../database/data');
 
 class QuestionnaireController {
   async questionnaire({ params, view }) {
@@ -99,18 +100,66 @@ class QuestionnaireController {
           answersData.push(Answer);
         });
         Database.table('answers').insert(answersData);
-        session.flash({
-          message:
-            '¡Gracias por responder! Estamos a tu servicio ,contáctanos.',
-        });
-        response.route('done', {});
-        return;
       }
+      session.flash({
+        message: '¡Gracias por responder! Estamos a tu servicio ,contáctanos.',
+      });
+      response.route('done', {});
+      return;
     } else {
       let nextPage = page + 1;
       response.route('questionnaire', { page: nextPage });
       return;
     }
+  }
+
+  async showResults({ request, response, params, view, session }) {
+    let results = await Promise.all(
+      [...Array(7)]
+        .map((_e, index) => index + 1)
+        .map(async (area_id) => ({
+          name: areas[area_id - 1].name,
+          ...(await this.getRisk({
+            area_id,
+            questionsQuantity: areas[area_id - 1].questions,
+          })),
+        }))
+    );
+
+    return view.render('school-info', { results });
+  }
+
+  async getRisk({
+    area_id,
+    questionsQuantity,
+    school,
+    grade,
+    groupLetter,
+    schedule,
+    gender,
+  }) {
+    let answers = await Database.table('answers')
+      .innerJoin(
+        Database.table('areas_questions')
+          .where({ area_id })
+          .select()
+          .as('filtered_questions'),
+        'filtered_questions.question_id',
+        'answers.question_id'
+      )
+      .select('answer', 'positiveIsRisk', 'student_id');
+    const rawRisks = answers.reduce((acc, answer) => {
+      return acc + (answer.positiveIsRisk ? +answer.answer : +!answer.answer);
+    }, 0);
+    let totalAnswers = 0;
+    let uniqueUsers = new Set();
+    answers.forEach((answer) => {
+      uniqueUsers.add(answer.student_id);
+    });
+    totalAnswers = uniqueUsers.size;
+    const risk = (rawRisks * 100) / (totalAnswers * questionsQuantity);
+
+    return { risk, totalAnswers };
   }
 }
 

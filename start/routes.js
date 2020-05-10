@@ -65,8 +65,7 @@ Route.post('/generar-claves', 'GroupController.saveAutomatic').as(
 
 Route.get('/claves/:id', 'GroupController.showKeys').as('accessKeys');
 
-Route.on('/statistics')
-  .render('school-info')
+Route.get('/resultados', 'QuestionnaireController.showResults')
   .as('statistics')
   .middleware(['auth']);
 
@@ -81,9 +80,13 @@ Route.on('/statistics-classroom')
 |--------------------------------------------------------------------------
 */
 Route.on('/profesor').render('professor').as('professor');
-Route.get('/professor-index/:id/:code', 'TeacherController.show').as('professorIndex');
+Route.get('/professor-index/:id/:code', 'TeacherController.show').as(
+  'professorIndex'
+);
 Route.post('/acceso-profesor', 'TeacherController.index').as('teacherAccess');
-Route.post('/borrar-estudiante', 'StudentController.delete').as('deleteStudent');
+Route.post('/borrar-estudiante', 'StudentController.delete').as(
+  'deleteStudent'
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -95,12 +98,8 @@ Route.post('/encuesta', 'QuestionnaireController.access').as(
   'questionnaireAccess'
 );
 
-Route.get(
-  '/cuestionario/:page',
-  'QuestionnaireController.questionnaire'
-).as('questionnaire');
-Route.post(
-  '/terminar',
-  'QuestionnaireController.saveAnswers'
-).as('finish');
+Route.get('/cuestionario/:page', 'QuestionnaireController.questionnaire').as(
+  'questionnaire'
+);
+Route.post('/terminar', 'QuestionnaireController.saveAnswers').as('finish');
 Route.on('/terminado').render('contact').as('done');
