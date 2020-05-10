@@ -14,15 +14,15 @@
 const Factory = use('Factory');
 const Database = use('Database');
 const {
-  areaNames,
+  areas: areasData,
   questionStrings,
   areaQuestionRelationships,
 } = require('../data');
 
 class AreasQuestionsSeeder {
   async run() {
-    let areas = areaNames.map((area) => ({
-      name: area,
+    let areas = areasData.map((area) => ({
+      name: area.name,
     }));
     await Database.table('areas').insert(areas);
 
