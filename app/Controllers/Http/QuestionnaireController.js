@@ -98,7 +98,7 @@ class QuestionnaireController {
           });
           answersData.push(Answer);
         });
-        Database.table('answer_students').insert(answersData);
+        Database.table('answers').insert(answersData);
         session.flash({
           message:
             '¡Gracias por responder! Estamos a tu servicio ,contáctanos.',
