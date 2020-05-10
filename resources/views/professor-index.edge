@@ -38,18 +38,18 @@
           </tr>
         </thead>
         <tbody>
-          @each( s in students)
+          @each(student in students)
           <tr>
-            <td>{{s.name}}</td>
-            <td>{{s.gender}}</td>
-            <td>{{s.age}}</td>
-            <td>{{s.schedule}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.gender}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.schedule}}</td>
             <td>
               <button
                 type="submit"
                 class="btn btn-danger"
                 name="id"
-                value="{{s.id}}"
+                value="{{student.id}}"
               >
                 Borrar
               </button>
