@@ -16,7 +16,7 @@ const Factory = use('Factory');
 const Database = use('Database');
 class AnswersSeeder {
   async run() {
-    let students = await Factory.model('App/Models/Student').createMany(100);
+    let students = await Factory.model('App/Models/Student').createMany(200);
 
     let answers = [...Array(81)]
       .map((_e, index) => index + 1)
@@ -25,13 +25,12 @@ class AnswersSeeder {
           ...acc,
           ...students.map((student) => ({
             student_id: student.id,
-            answer: chance.bool(),
+            answer: chance.bool({ likelihood: 65 }),
             question_id,
           })),
         ],
         []
       );
-    console.log(answers);
     await Database.table('answers').insert(answers);
   }
 }
