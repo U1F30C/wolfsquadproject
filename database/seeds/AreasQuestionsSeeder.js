@@ -21,27 +21,18 @@ const {
 
 class AreasQuestionsSeeder {
   async run() {
-    let areas = areaNames.map(
-      async (area) =>
-        await Factory.model('App/Models/Area').create({
-          name: area,
-        })
-    );
-    Database.table('areas').insert(areas);
+    let areas = areaNames.map((area) => ({
+      name: area,
+    }));
+    await Database.table('areas').insert(areas);
 
-    let questions = Object.values(questionStrings).map(
-      async (question) =>
-        await Factory.model('App/Models/Question').create({
-          description: question,
-        })
-    );
-    Database.table('questions').insert(questions);
+    let questions = Object.values(questionStrings).map((question) => ({
+      description: question,
+    }));
+    await Database.table('questions').insert(questions);
 
-    let areaQuestions = Object.values(areaQuestionRelationships).map(
-      async (relation) =>
-        await Factory.model('App/Models/AreasQuestions').create(relation)
-    );
-    Database.table('areas_questions').insert(areaQuestions);
+    let areaQuestions = Object.values(areaQuestionRelationships);
+    await Database.table('areas_questions').insert(areaQuestions);
   }
 }
 
