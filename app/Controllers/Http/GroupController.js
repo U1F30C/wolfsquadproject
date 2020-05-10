@@ -2,7 +2,7 @@
 const School = use('App/Models/School');
 const Group = use('App/Models/Group');
 const Database = use('Database');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const cartesian = require('fast-cartesian');
 
 class GroupController {
@@ -36,16 +36,11 @@ class GroupController {
     const gradesQuantity = parseInt(request.input('grado'));
     const groupsQuantity = request.input('grupo').charCodeAt(0) - 64;
 
-    const groups = await Promise.all(
-      cartesian([
-        [...Array(gradesQuantity)].map((_e, index) => index + 1),
-        [...Array(groupsQuantity)].map((_e, index) =>
-          String.fromCharCode(index + 1 + 64)
-        ),
-      ]).map(async (gradeGroupCombination) => {
-        let [grade, groupLetter] = gradeGroupCombination;
-        return this.createGroup(grade, groupLetter, schoolId, schoolName);
-      })
+    const groups = await this.createGroups(
+      gradesQuantity,
+      groupsQuantity,
+      schoolId,
+      schoolName
     );
     await Database.table('groups').insert(groups);
 
@@ -63,6 +58,20 @@ class GroupController {
         .slice(-4),
       name: grade + '-' + groupLetter,
     };
+  }
+
+  async createGroups(gradesQuantity, groupsQuantity, schoolId, schoolName) {
+    return Promise.all(
+      cartesian([
+        [...Array(gradesQuantity)].map((_e, index) => index + 1),
+        [...Array(groupsQuantity)].map((_e, index) =>
+          String.fromCharCode(index + 1 + 64)
+        ),
+      ]).map(async (gradeGroupCombination) => {
+        let [grade, groupLetter] = gradeGroupCombination;
+        return this.createGroup(grade, groupLetter, schoolId, schoolName);
+      })
+    );
   }
 
   async showKeys({ view, params }) {
