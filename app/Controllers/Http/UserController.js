@@ -2,6 +2,7 @@
 
 const Database = use('Database');
 const Mail = use('Mail');
+const Env = use('Env');
 
 class UserController {
   async login({ auth, request, response }) {
@@ -21,23 +22,25 @@ class UserController {
   }
 
   async forgotPassword({ request, response }) {
-    const emailInput = request.input('inputEmail');
-
-    console.log(emailInput);
+    const email = request.input('email');
+    console.log(email);
     const user = await Database.table('users')
-      .where('email', emailInput)
+      .where('email', email)
       .first();
 
     if (user) {
       await Mail.send('emailForgotPassword', user, (message) => {
         message
           .to(user.email)
-          .from('tlaquepaque.cij@hotmail.com', 'CIJ')
-          .subject('Forgot Password');
+          .from(Env.get('MAIL_USERNAME'), 'CIJ')
+          .subject('Recuperar contraseña');
       });
+      response.route('login');
+      return;
     } else {
+      response.route('passwordRecovery');
+      return;
     }
-    response.redirect('/login');
   }
 }
 
