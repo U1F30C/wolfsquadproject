@@ -6,7 +6,7 @@ const Validator = use('Validator');
 const Student = use('App/Models/Student');
 
 class QuestionnaireController {
-  async questionnaire({ request, response, params, view, session }) {
+  async questionnaire({ params, view }) {
     const page = params.page || 1;
     const questions = await Question.query().paginate(page, 10);
     const pagination = questions.toJSON();
@@ -20,7 +20,7 @@ class QuestionnaireController {
     return view.render('questionnaire', { questions: pagination });
   }
 
-  async access({ request, response, params, view, session }) {
+  async access({ request, response, session }) {
     const parameters = request.all();
 
     const rules = {

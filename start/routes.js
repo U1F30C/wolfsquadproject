@@ -81,8 +81,9 @@ Route.on('/statistics-classroom')
 |--------------------------------------------------------------------------
 */
 Route.on('/profesor').render('professor').as('professor');
-Route.on('/professor-list').render('professor-list').as('groupAnswersList');
-Route.post('/lista-respuestas', 'TeacherController.list').as('teacherAccess');
+Route.get('/professor-index/:id/:code', 'TeacherController.show').as('professorIndex');
+Route.post('/acceso-profesor', 'TeacherController.index').as('teacherAccess');
+Route.post('/borrar-estudiante', 'StudentController.delete').as('deleteStudent');
 
 /*
 |--------------------------------------------------------------------------
