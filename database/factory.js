@@ -34,7 +34,7 @@ Factory.blueprint('App/Models/Question', (faker, i, data) => {
   };
 });
 
-Factory.blueprint('App/Models/AreasQuestion', (faker, i, data) => {
+Factory.blueprint('App/Models/AreasQuestions', (faker, i, data) => {
   return {
     area_id: data.area_id,
     question_id: data.question_id,

@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| AreaQuestionSeeder
+| AreasQuestionsSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -17,9 +17,9 @@ const {
   areaNames,
   questionStrings,
   areaQuestionRelationships,
-} = require('./../data');
+} = require('../data');
 
-class AreaQuestionSeeder {
+class AreasQuestionsSeeder {
   async run() {
     let areas = areaNames.map(
       async (area) =>
@@ -39,10 +39,10 @@ class AreaQuestionSeeder {
 
     let areaQuestions = Object.values(areaQuestionRelationships).map(
       async (Relation) =>
-        await Factory.model('App/Models/AreasQuestion').create(Relation)
+        await Factory.model('App/Models/AreasQuestions').create(Relation)
     );
     Database.table('areas_questions').insert(areaQuestions);
   }
 }
 
-module.exports = AreaQuestionSeeder;
+module.exports = AreasQuestionsSeeder;
