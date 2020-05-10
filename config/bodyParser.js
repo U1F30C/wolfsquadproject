@@ -72,6 +72,7 @@ module.exports = {
   |
   */
   form: {
+    queryString: { parseArrays: false },
     types: ['application/x-www-form-urlencoded'],
   },
 

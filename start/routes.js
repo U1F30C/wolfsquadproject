@@ -29,6 +29,7 @@ Route.on('/contacto').render('contact').as('contact');
 */
 Route.on('/login').render('log-in').as('loginForm').middleware(['guest']);
 
+Route.post('/getPassword','UserController.forgotPassword').as('recoverPassword');
 Route.on('/recuperar-contrasena')
   .render('recover-password')
   .as('passwordRecovery')

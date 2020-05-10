@@ -41,7 +41,7 @@ class AreaQuestionSeeder {
       async (Relation) =>
         await Factory.model('App/Models/AreasQuestion').create(Relation)
     );
-    Database.table('questions').insert(areaQuestions);
+    Database.table('areas_questions').insert(areaQuestions);
   }
 }
 
