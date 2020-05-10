@@ -28,7 +28,6 @@ class UserSeeder {
         username: 'admin1',
         password: 'admin1',
       });
-      await Database.table('users').insert(defaultUser);
     }
   }
 }
