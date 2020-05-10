@@ -7,8 +7,7 @@
   "scripts": {
     "start": "ENV_SILENT='true' node server.js",
     "migrate": "node ace migration:run",
-    "seed": "node ace seed",
-    "ms": "node ace migration:run; node ace seed"
+    "seed": "node ace seed --files='UserSeeder.js, AreasQuestionsSeeder.js'"
   },
   "keywords": [
     "adonisjs",
