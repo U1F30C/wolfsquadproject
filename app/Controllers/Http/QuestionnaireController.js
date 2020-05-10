@@ -63,7 +63,7 @@ class QuestionnaireController {
         student.schedule = schedule;
         student.group_id = group.id;
 
-        student.save();
+        await student.save();
         session.put('studentId', student.id);
         response.route('questionnaire', { page: 1 });
       } else {
