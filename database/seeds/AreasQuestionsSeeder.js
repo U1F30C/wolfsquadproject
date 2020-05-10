@@ -21,18 +21,20 @@ const {
 
 class AreasQuestionsSeeder {
   async run() {
-    let areas = areasData.map((area) => ({
-      name: area.name,
-    }));
-    await Database.table('areas').insert(areas);
-
-    let questions = Object.values(questionStrings).map((question) => ({
-      description: question,
-    }));
-    await Database.table('questions').insert(questions);
-
-    let areaQuestions = Object.values(areaQuestionRelationships);
-    await Database.table('areas_questions').insert(areaQuestions);
+    if (!(await Database.table('areas_questions').first())) {
+      let areas = areasData.map((area) => ({
+        name: area.name,
+      }));
+      await Database.table('areas').insert(areas);
+      let questions = Object.values(questionStrings).map((question) => ({
+        description: question,
+      }));
+      await Database.table('questions').insert(questions);
+      let areaQuestions = Object.values(areaQuestionRelationships);
+      await Database.table('areas_questions').insert(areaQuestions);
+    } else {
+      console.log('\'areas_questions\' already seeded, skipping');
+    }
   }
 }
 
