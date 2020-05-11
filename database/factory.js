@@ -65,3 +65,9 @@ Factory.blueprint('App/Models/Group', (faker, i, data) => {
     name: grade + '-' + groupLetter,
   };
 });
+
+Factory.blueprint('App/Models/School', (faker, i, data) => {
+  return {
+    name: data.name,
+  };
+});
