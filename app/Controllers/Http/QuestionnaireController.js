@@ -5,6 +5,7 @@ const Database = use('Database');
 const Validator = use('Validator');
 const Student = use('App/Models/Student');
 const { areas } = require('./../../../database/data');
+const _ = require('lodash');
 
 class QuestionnaireController {
   async questionnaire({ params, view }) {
@@ -114,31 +115,36 @@ class QuestionnaireController {
   }
 
   async showResults({ request, response, params, view, session }) {
+    let filterParams = transformParams(request.all());
+    const totalQuestionnairesAnswered = (
+      await this.filterAnswers(filterParams).countDistinct('student_id').first()
+    ).count;
     let results = await Promise.all(
-      [...Array(7)]
-        .map((_e, index) => index + 1)
-        .map(async (area_id) => ({
-          name: areas[area_id - 1].name,
-          ...(await this.getRisk({
-            area_id,
-            questionsQuantity: areas[area_id - 1].questions,
-          })),
-        }))
+      areas.map(async (area, index) => ({
+        name: area.name,
+        risk: await this.getRisk({
+          area_id: index + 1,
+          questionsQuantity: area.questions,
+          totalQuestionnairesAnswered,
+          filterParams,
+        }),
+      }))
     );
 
-    return view.render('school-info', { results });
+    return view.render('school-info', {
+      results,
+      totalQuestionnairesAnswered,
+      filterParams,
+    });
   }
 
   async getRisk({
     area_id,
     questionsQuantity,
-    school,
-    grade,
-    groupLetter,
-    schedule,
-    gender,
+    totalQuestionnairesAnswered,
+    filterParams,
   }) {
-    let answers = await Database.table('answers')
+    let answers = await this.filterAnswers(filterParams)
       .innerJoin(
         Database.table('areas_questions')
           .where({ area_id })
@@ -151,16 +157,77 @@ class QuestionnaireController {
     const rawRisks = answers.reduce((acc, answer) => {
       return acc + (answer.positiveIsRisk ? +answer.answer : +!answer.answer);
     }, 0);
-    let totalAnswers = 0;
-    let uniqueUsers = new Set();
-    answers.forEach((answer) => {
-      uniqueUsers.add(answer.student_id);
-    });
-    totalAnswers = uniqueUsers.size;
-    const risk = (rawRisks * 100) / (totalAnswers * questionsQuantity);
+    return (rawRisks * 100) / (totalQuestionnairesAnswered * questionsQuantity);
+  }
 
-    return { risk, totalAnswers };
+  filterAnswers(filterParams) {
+    if (_.isEmpty(filterParams)) {
+      return Database.table('answers');
+    } else {
+      let answersQuery = Database.table('answers').whereIn(
+        'student_id',
+        function () {
+          const {
+            age,
+            schedule,
+            gender,
+            groupLetter,
+            grade,
+            school_id,
+          } = filterParams;
+          let students = this.table('students');
+          if (age) {
+            students = students.where({ age });
+          }
+          if (schedule) {
+            students = students.where({ schedule });
+          }
+          if (gender) {
+            students = students.where({ gender });
+          }
+          if (grade) {
+            students = students.whereIn('group_id', function () {
+              this.table('groups')
+                .where('name', 'like', `${grade}__`)
+                .select('id');
+            });
+          }
+          if (groupLetter) {
+            students = students.whereIn('group_id', function () {
+              this.table('groups')
+                .where('name', 'like', `__${groupLetter}`)
+                .select('id');
+            });
+          }
+          if (school_id) {
+            students = students.whereIn('group_id', function () {
+              this.table('groups').where({ school_id }).select('id');
+            });
+          }
+          return students.select('id');
+        }
+      );
+      return answersQuery;
+    }
   }
 }
+
+function transformParams(originalLanguageParams) {
+  return Object.entries(originalLanguageParams).reduce((acc, param) => {
+    let [key, value] = param;
+    if (paramsTransformation[key])
+      return { ...acc, [paramsTransformation[key]]: value };
+    else return acc;
+  }, {});
+}
+
+const paramsTransformation = {
+  escuela: 'school_id',
+  grado: 'grade',
+  grupo: 'groupLetter',
+  horario: 'schedule',
+  genero: 'gender',
+  edad: 'age',
+};
 
 module.exports = QuestionnaireController;
