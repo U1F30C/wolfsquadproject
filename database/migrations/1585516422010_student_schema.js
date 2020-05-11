@@ -12,7 +12,7 @@ class StudentSchema extends Schema {
       table.string('gender', 1).notNullable().defaultTo('F');
       table.integer('age').notNullable();
       table.string('schedule', 1).notNullable().defaultTo('M');
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

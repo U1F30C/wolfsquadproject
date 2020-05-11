@@ -8,7 +8,7 @@ class QuestionSchema extends Schema {
     this.create('questions', (table) => {
       table.increments();
       table.string('description', 300).notNullable();
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

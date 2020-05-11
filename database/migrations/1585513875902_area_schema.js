@@ -8,7 +8,7 @@ class AreaSchema extends Schema {
     this.create('areas', (table) => {
       table.increments();
       table.string('name', 80).notNullable();
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

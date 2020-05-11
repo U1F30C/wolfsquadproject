@@ -11,7 +11,7 @@ class GroupSchema extends Schema {
       table.string('studentsAccessKey', 20).notNullable().unique();
       table.string('teachersAccessKey', 20).notNullable().unique();
       table.string('name', 5).notNullable();
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

@@ -10,7 +10,7 @@ class QuestionnaireAccessSchema extends Schema {
       table.integer('school_id').unsigned().references('id').inTable('schools');
       table.date('OpenDate').notNullable();
       table.date('CloseDate').notNullable();
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

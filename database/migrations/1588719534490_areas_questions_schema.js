@@ -14,7 +14,7 @@ class AreasQuestionsSchema extends Schema {
         .references('id')
         .inTable('questions');
       table.boolean('positiveIsRisk').defaultTo(true);
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 

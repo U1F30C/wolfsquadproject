@@ -18,7 +18,7 @@ class AnswerSchema extends Schema {
         .references('id')
         .inTable('students');
       table.boolean('answer').defaultTo(false);
-      table.timestamps();
+      table.timestamps(true, true);
     });
   }
 
