@@ -49,6 +49,7 @@ Factory.blueprint('App/Models/Student', (faker, i, data) => {
     age: faker.age({ type: 'teen' }),
     gender: faker.character({ pool: 'FM' }),
     schedule: faker.character({ pool: 'MV' }),
+    group_id: data.group_id || null,
   };
 });
 
@@ -68,6 +69,6 @@ Factory.blueprint('App/Models/Group', (faker, i, data) => {
 
 Factory.blueprint('App/Models/School', (faker, i, data) => {
   return {
-    name: data.name,
+    name: data[i].name,
   };
 });
