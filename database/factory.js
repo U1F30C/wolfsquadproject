@@ -11,6 +11,7 @@
 |
 */
 
+const bcrypt = require('bcrypt');
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 
@@ -48,5 +49,19 @@ Factory.blueprint('App/Models/Student', (faker, i, data) => {
     age: faker.age({ type: 'teen' }),
     gender: faker.character({ pool: 'FM' }),
     schedule: faker.character({ pool: 'MV' }),
+  };
+});
+
+Factory.blueprint('App/Models/Group', (faker, i, data) => {
+  const { grade, groupLetter, schoolId, schoolName } = data;
+  return {
+    school_id: schoolId,
+    studentsAccessKey: bcrypt
+      .hashSync(schoolName + groupLetter + grade + schoolId, 2)
+      .slice(-4),
+    teachersAccessKey: bcrypt
+      .hashSync(groupLetter + schoolName + grade + schoolId, 2)
+      .slice(-4),
+    name: grade + '-' + groupLetter,
   };
 });
