@@ -33,7 +33,7 @@ class AreasQuestionsSeeder {
       let areaQuestions = Object.values(areaQuestionRelationships);
       await Database.table('areas_questions').insert(areaQuestions);
     } else {
-      console.log('\'areas_questions\' already seeded, skipping');
+      console.log('"areas_questions" already seeded, skipping');
     }
   }
 }
