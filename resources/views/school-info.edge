@@ -37,6 +37,9 @@
       Grupo
     </div>
 
+    @if(filterParams.school_id)
+    <input type="hidden" name="escuela" value="{{filterParams.school_id}}">
+    @endif
     <div class="col">
       <select name="genero" class="form-control">
         <optgroup label="Genero">

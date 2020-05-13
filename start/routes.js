@@ -42,8 +42,7 @@ Route.on('/cambiar-contrasena')
   .as('passwordChange')
   .middleware(['auth']);
 
-Route.on('/escuelas')
-  .render('create-schools-form')
+Route.get('/escuelas', 'SchoolController.list')
   .as('schoolsManagement')
   .middleware(['auth']);
 
@@ -67,11 +66,6 @@ Route.get('/claves/:id', 'GroupController.showKeys').as('accessKeys');
 
 Route.get('/resultados', 'QuestionnaireController.showResults')
   .as('statistics')
-  .middleware(['auth']);
-
-Route.on('/statistics-classroom')
-  .render('classroom-info')
-  .as('classRoomAnswers')
   .middleware(['auth']);
 
 /*
