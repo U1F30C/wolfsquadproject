@@ -19,14 +19,14 @@ class UserSeeder {
     const usersArray = await Factory.model('App/Models/User').createMany(2);
     const defaultUserExists = (
       await Database.table('users').where({
-        username: 'admin1',
+        email: Env.get('ADMIN_EMAIL')
       })
     ).length;
     if (!defaultUserExists) {
       const defaultUser = await Factory.model('App/Models/User').create({
-        email: 'admin1@wsp.com',
-        username: 'admin1',
-        password: 'admin1',
+        email: Env.get('ADMIN_EMAIL'),
+        username: Env.get('ADMIN_NAME'),
+        password: Env.get('ADMIN_PASSWORD'),
       });
     }
   }
