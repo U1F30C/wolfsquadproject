@@ -2,8 +2,9 @@
 const Database = use('Database');
 const Validator = use('Validator');
 
-class TeacherController {
-  async index({ request, response, auth }) {
+class TeacherController { 
+
+  async index({ request, response, auth,session }) {
     const teacher_code = request.input('teacher_code');
 
     const rules = {
@@ -27,12 +28,8 @@ class TeacherController {
       return;
     }
 
-    const group = await Database.table('groups')
-      .where({
-        teachersAccessKey: teacher_code.slice(-4),
-        id: teacher_code.slice(0, -4),
-      })
-      .first();
+    const group = await this.codeExist(teacher_code)
+
     if (group) {
       response.route('TeacherController.show', {
         id: group.id,
@@ -46,11 +43,27 @@ class TeacherController {
     }
   }
 
-  async show({ request, response, params, view }) {
-    const id = params.id;
+  async codeExist(code){
+    const id = code.slice(0, -4)
+    const teacherCode = code.slice(-4)
 
+    const group =await Database.table('groups')
+      .where({
+        teachersAccessKey: teacherCode,
+        id: id,
+      })
+      .first();  
+    return group
+  }
+
+  async show({ request, response, params, view, session }) {
+    const id = params.id;
+    const teacher_code = params.code
+    
     const students = await Database.table('students').where('group_id', id);
-    if (students) {
+    const group = await this.codeExist(teacher_code)
+
+    if (students && group) {
       return view.render('professor-index', { students });
     } else {
       session.flash({
