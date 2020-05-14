@@ -3,20 +3,25 @@ const Database = use('Database');
 const Validator = use('Validator');
 
 class TeacherController {
-  async index({ request, response, auth }) {
-    const teacher_code = request.input('teacher_code');
+  async index({ request, response, auth, session }) {
+    const teachersAccessKey = request.input('teacher_code');
 
     const rules = {
-      teacher_code: 'required|code',
+      teachersAccessKey: 'required|code',
     };
 
     const messages = {
-      'teacher_code.required':
+      'teachersAccessKey.required':
         '¡Error! Por favor llena toda la información para continuar.',
-      'teacher_code.code': '¡Error! El código que ingresaste no es válido.',
+      'teachersAccessKey.code':
+        '¡Error! El código que ingresaste no es válido.',
     };
 
-    const validate = await Validator.validate(teacher_code, rules, messages);
+    const validate = await Validator.validate(
+      teachersAccessKey,
+      rules,
+      messages
+    );
 
     if (validate.fails()) {
       session.flash({
@@ -27,30 +32,42 @@ class TeacherController {
       return;
     }
 
-    const group = await Database.table('groups')
-      .where({
-        teachersAccessKey: teacher_code.slice(-4),
-        id: teacher_code.slice(0, -4),
-      })
-      .first();
+    const group = await this.getGroup(teachersAccessKey);
+
     if (group) {
       response.route('TeacherController.show', {
-        id: group.id,
-        code: teacher_code,
+        code: teachersAccessKey,
       });
     } else {
-      var error = {
-        msg: 'Registo no encontrado',
-      };
-      response.status(400).send(error);
+      session.flash({
+        type: 'error',
+        message: '¡Error! No encontramos la clave, confirma tu información.',
+      });
+      response.route('professor', {});
     }
   }
 
-  async show({ request, response, params, view }) {
-    const id = params.id;
+  async getGroup(code) {
+    const id = code.slice(0, -4);
+    const teachersAccessKey = code.slice(-4);
+
+    const group = await Database.table('groups')
+      .where({
+        teachersAccessKey,
+        id: id,
+      })
+      .first();
+    return group;
+  }
+
+  async show({ request, response, params, view, session }) {
+    const id = params.code.slice(0, -4);
+    const teachersAccessKey = params.code;
 
     const students = await Database.table('students').where('group_id', id);
-    if (students) {
+    const group = await this.getGroup(teachersAccessKey);
+
+    if (students && group) {
       return view.render('professor-index', { students });
     } else {
       session.flash({
