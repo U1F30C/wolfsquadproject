@@ -74,7 +74,7 @@ Route.get('/resultados', 'QuestionnaireController.showResults')
 |--------------------------------------------------------------------------
 */
 Route.on('/profesor').render('professor').as('professor');
-Route.get('/professor-index/:id/:code', 'TeacherController.show').as(
+Route.get('/professor-index/:code', 'TeacherController.show').as(
   'professorIndex'
 );
 Route.post('/acceso-profesor', 'TeacherController.index').as('teacherAccess');
