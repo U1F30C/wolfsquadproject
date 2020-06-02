@@ -6,9 +6,27 @@
   "main": "server.js",
   "scripts": {
     "start": "ENV_SILENT='true' node server.js",
-    "migrate": "node ace migration:run",
-    "seed": "node ace seed --files='UserSeeder.js, AreasQuestionsSeeder.js'"
+    "migrate": "ENV_SILENT='true' node ace migration:run",
+    "rollback": "ENV_SILENT='true' node ace migration:rollback",
+    "seed": "ENV_SILENT='true' node ace seed --files='UserSeeder.js, AreasQuestionsSeeder.js'",
+    "pack": "pkg . -t host"
   },
+  "pkg": {
+    "scripts": [
+      "start/**/*.js",
+      "app/**/*",
+      "config/**/*",
+      "database/**/*"
+    ],
+    "assets": [
+      "resources/**/*",
+      "public/**/*",
+      "package.json",
+      "node_modules/@adonisjs/**/*",
+      "./.env"
+    ]
+  },
+  "bin": "server.js",
   "keywords": [
     "adonisjs",
     "adonis-app"
