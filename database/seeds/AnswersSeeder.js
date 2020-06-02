@@ -17,7 +17,7 @@ const Factory = use('Factory');
 const Database = use('Database');
 class AnswersSeeder {
   async run() {
-    const schoolNames = [...Array(10)].map((_e, index) => ({
+    const schoolNames = [...Array(2)].map((_e, index) => ({
       name: `Escuela #${index + 1}`,
     }));
     const schools = await Factory.model('App/Models/School').createMany(
@@ -26,8 +26,8 @@ class AnswersSeeder {
     );
     schools.forEach(async (school) => {
       const [gradesQuantity, groupsQuantity] = [
-        chance.integer({ min: 1, max: 9 }),
-        chance.integer({ min: 1, max: 6 }),
+        chance.integer({ min: 1, max: 2 }),
+        chance.integer({ min: 1, max: 2 }),
       ];
       const groups = await Promise.all(
         cartesian([
@@ -47,7 +47,7 @@ class AnswersSeeder {
       );
       groups.forEach(async (group) => {
         let students = await Factory.model('App/Models/Student').createMany(
-          chance.integer({ min: 7, max: 30 }),
+          chance.integer({ min: 5, max: 7 }),
           {
             group_id: group.id,
           }
