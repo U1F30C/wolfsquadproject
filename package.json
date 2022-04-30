@@ -52,7 +52,7 @@
     "fast-cartesian": "^5.0.0",
     "knex": "^0.21.1",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.2",
+    "minimist": "^1.2.6",
     "pg": "^8.1.0",
     "sqlite3": "^4.2.0"
   },
